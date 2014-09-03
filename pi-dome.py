@@ -1,6 +1,25 @@
 #!flask/bin/python
+# ====================================================================
+# The pi-dome script was a idea I had after seeing a garage door 
+# youtube video where a raspberry pi was used with a 5v relay.
+#
+# Copyright (C) 2014 by TekZap Co. 
+# All Rights Reserved.
+#
+# THIS SOFTWARE SCRIPT IS PROVIDED BY TekZap Co.
+# "AS IS" AND IS FOR REFERENCE USE ONLY.  ANY EXPRESS OR IMPLIED 
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
+# OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+# DISCLAIMED. IN NO EVENT SHALL TekZap Co. 
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, 
+# OR CONSEQUENTIAL DAMAGES ARISING FROM THE USE THEREOF.
+# ====================================================================
+
+# ====================================================================
+# Import from libraries 
+# ====================================================================
+
 from flask import Flask, jsonify, abort
-VERSION_NUMBER = 0.1 #Earily Alpha
 
 app = Flask(__name__)
 
@@ -50,9 +69,9 @@ garage = [
     }
 ]
 
-############################################
-# Doors
-############################################
+# ====================================================================
+# Doors 
+# ====================================================================
 @app.route('/api/doors/', methods = ['GET'])
 def get_doors():
     return jsonify( { 'doors': doors } )
@@ -64,9 +83,9 @@ def get_door_id(door_id):
         abort(404)
     return jsonify( { 'door': d_id[0] } )
 
-############################################
-# Windows
-############################################
+# ====================================================================
+# Windows                     
+# ====================================================================
 @app.route('/api/windows/', methods = ['GET'])
 def get_windows():
     return jsonify( { 'windows': windows } )
@@ -78,9 +97,9 @@ def get_window_id(window_id):
         abort(404)
     return jsonify( { 'window': w_id[0] } )
 
-############################################
-# Garage Door
-############################################
+# ====================================================================
+# Garage Door                     
+# ====================================================================
 @app.route('/api/garage/', methods = ['GET'])
 def get_garage():
     return jsonify( { 'garage': garage } )
@@ -92,13 +111,17 @@ def get_garage_id(garage_id):
         abort(404)
     return jsonify( { 'garage': g_id[0] } )
 
-############################################
+# ====================================================================
 # Place holder
-############################################
+# ====================================================================
 @app.route('/api/doors/update/', methods = ['GET'])
 def update_doors():
     #doors[0]['description'] = 'Garge door up - updated'
     return "Updating"
 
+
+# ====================================================================
+# Main function
+# ====================================================================
 if __name__ == '__main__':
     app.run(debug = True)
