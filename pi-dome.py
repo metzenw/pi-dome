@@ -44,6 +44,18 @@
 # ====================================================================
 
 from flask import Flask, jsonify, abort, make_response, request
+from flask.ext.httpauth import HTTPBasicAuth
+
+auth = HTTPBasicAuth()
+def get_password(username):
+    if username == "pi-dome":
+        return 'pi-dome'
+    return None
+
+@auth.error_handler
+def unauthorized():
+    return make_response( jsonify( { 'error': 'Unauthorized access' } ), 401 )
+
 
 app = Flask(__name__)
 
@@ -97,10 +109,12 @@ garage = [
 # Doors 
 # ====================================================================
 @app.route('/api/doors/', methods = ['GET'])
+@auth.login_required
 def get_doors():
     return jsonify( { 'doors': doors } )
 
 @app.route('/api/doors/<int:door_id>', methods = ['GET'])
+@auth.login_required
 def get_door_id(door_id):
     d_id = filter(lambda t: t['id'] == door_id, doors)
     if len(d_id ) == 0:
@@ -108,6 +122,7 @@ def get_door_id(door_id):
     return jsonify( { 'door': d_id[0] } )
 
 @app.route('/api/doors/', methods = ['POST'])
+@auth.login_required
 def create_door():
     if not request.json or not 'gpio' in request.json:
         abort(400)
@@ -125,6 +140,7 @@ def create_door():
     return jsonify( { 'door': door } ), 201
 
 @app.route('/api/doors/<int:door_id>', methods = ['PUT'])
+@auth.login_required
 def update_door(door_id):
     door = filter(lambda t: t['id'] == door_id, doors)
     if len(door) == 0:
@@ -143,6 +159,7 @@ def update_door(door_id):
     return jsonify( { 'door': door[0] } )
 
 @app.route('/api/doors/<int:door_id>', methods = ['DELETE'])
+@auth.login_required
 def delete_door(door_id):
     door = filter(lambda t: t['id'] == door_id, doors)
     if len(door) == 0:
@@ -154,10 +171,12 @@ def delete_door(door_id):
 # Windows                     
 # ====================================================================
 @app.route('/api/windows/', methods = ['GET'])
+@auth.login_required
 def get_windows():
     return jsonify( { 'windows': windows } )
 
 @app.route('/api/windows/<int:window_id>', methods = ['GET'])
+@auth.login_required
 def get_window_id(window_id):
     w_id = filter(lambda t: t['id'] == window_id, windows)
     if len(w_id) == 0:
@@ -165,6 +184,7 @@ def get_window_id(window_id):
     return jsonify( { 'window': w_id[0] } )
 
 @app.route('/api/windows/', methods = ['POST'])
+@auth.login_required
 def create_window():
     if not request.json or not 'gpio' in request.json:
         abort(400)
@@ -181,6 +201,7 @@ def create_window():
     return jsonify( {'window': window} ), 201
 
 @app.route('/api/windows/<int:window_id>', methods = ['PUT'])
+@auth.login_required
 def update_window(window_id):
     window = filter(lambda t: t['id'] == window_id, windows)
     if len(window) == 0:
@@ -199,6 +220,7 @@ def update_window(window_id):
     return jsonify( { 'window': window[0] } )
 
 @app.route('/api/windows/<int:window_id>', methods = ['DELETE'])
+@auth.login_required
 def delete_window(window_id):
     window = filter(lambda t: t['id'] == window_id, windows)
     if len(window) == 0:
@@ -211,10 +233,12 @@ def delete_window(window_id):
 # Garage Door                     
 # ====================================================================
 @app.route('/api/garage/', methods = ['GET'])
+@auth.login_required
 def get_garage():
     return jsonify( { 'garage': garage } )
 
 @app.route('/api/garage/<int:garage_id>', methods = ['GET'])
+@auth.login_required
 def get_garage_id(garage_id):
     g_id = filter(lambda t: t['id'] == garage_id, garage)
     if len(g_id) == 0:
@@ -222,6 +246,7 @@ def get_garage_id(garage_id):
     return jsonify( { 'garage': g_id[0] } )
 
 @app.route('/api/garage/', methods = ['POST'])
+@auth.login_required
 def create_garage():
     if not request.json or not 'gpio' in request.json:
         abort(400)
@@ -239,6 +264,7 @@ def create_garage():
     return jsonify( { 'garage': g_garage } ), 201
 
 @app.route('/api/garage/<int:garage_id>', methods = ['PUT'])
+@auth.login_required
 def update_garage(garage_id):
     g_garage = filter(lambda t: t['id'] == garage_id, garage)
     if len(g_garage) == 0:
@@ -257,6 +283,7 @@ def update_garage(garage_id):
     return jsonify( { 'garage': g_garage[0] } )
 
 @app.route('/api/garage/<int:garage_id>', methods = ['DELETE'])
+@auth.login_required
 def delete_garage(garage_id):
     g_garage = filter(lambda t: t['id'] == garage_id, garage)
     if len(g_garage) == 0:
