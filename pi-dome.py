@@ -182,7 +182,7 @@ def create_window():
 
 @app.route('/api/windows/<int:window_id>', methods = ['PUT'])
 def update_window(window_id):
-    window = filter(lambda t: t['id'] == window_id, window)
+    window = filter(lambda t: t['id'] == window_id, windows)
     if len(window) == 0:
         abort(404)
     if not request.json:
@@ -240,7 +240,7 @@ def create_garage():
 
 @app.route('/api/garage/<int:garage_id>', methods = ['PUT'])
 def update_garage(garage_id):
-    g_garage = filter(lambda t: t['id'] == garage_id, g_garage)
+    g_garage = filter(lambda t: t['id'] == garage_id, garage)
     if len(g_garage) == 0:
         abort(404)
     if not request.json:
@@ -258,7 +258,7 @@ def update_garage(garage_id):
 
 @app.route('/api/garage/<int:garage_id>', methods = ['DELETE'])
 def delete_garage(garage_id):
-    g_garage = filter(lambda t: t['id'] == garage_id, g_garage)
+    g_garage = filter(lambda t: t['id'] == garage_id, garage)
     if len(g_garage) == 0:
         abort(404)
     garage.remove(g_garage[0])
