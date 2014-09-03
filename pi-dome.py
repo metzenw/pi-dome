@@ -1,5 +1,6 @@
 #!flask/bin/python
 from flask import Flask, jsonify, abort
+VERSION_NUMBER = 0.1 #Earily Alpha
 
 app = Flask(__name__)
 
