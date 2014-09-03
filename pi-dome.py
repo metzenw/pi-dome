@@ -107,6 +107,49 @@ def get_door_id(door_id):
         abort(404)
     return jsonify( { 'door': d_id[0] } )
 
+@app.route('/api/doors/', methods = ['POST'])
+def create_door():
+    if not request.json or not 'gpio' in request.json:
+        abort(400)
+    door = {
+        'id': doors[-1]['id'] + 1,
+        'type': request.json.get('type', ""),
+        'gpio': request.json['gpio'],
+        'voltage': request.json.get('voltage', ""),
+        'notes': request.json.get('notes', ""),
+        'description': request.json.get('description', ""),
+        'active': False,
+        'open': False
+    }
+    doors.append(door)
+    return jsonify( { 'door': door } ), 201
+
+@app.route('/api/doors/<int:door_id>', methods = ['PUT'])
+def update_door(door_id):
+    door = filter(lambda t: t['id'] == door_id, doors)
+    if len(door) == 0:
+        abort(404)
+    if not request.json:
+        abort(400)
+    if 'open' in request.json and type(request.json['open']) is not bool:
+        abort(400)
+    door[0]['id'] = request.json.get('id', door[0]['id'])
+    door[0]['type'] = request.json.get('type', door[0]['type'])
+    door[0]['gpio'] = request.json.get('gpio', door[0]['gpio'])
+    door[0]['voltage'] = request.json.get('voltage', door[0]['voltage'])
+    door[0]['notes'] = request.json.get('notes', door[0]['notes'])
+    door[0]['description'] = request.json.get('description', door[0]['description'])
+    door[0]['open'] = request.json.get('open', door[0]['open'])
+    return jsonify( { 'door': door[0] } )
+
+@app.route('/api/doors/<int:door_id>', methods = ['DELETE'])
+def delete_door(door_id):
+    door = filter(lambda t: t['id'] == door_id, doors)
+    if len(door) == 0:
+        abort(404)
+    doors.remove(door[0])
+    return jsonify( { 'result': True } )
+
 # ====================================================================
 # Windows                     
 # ====================================================================
@@ -120,6 +163,49 @@ def get_window_id(window_id):
     if len(w_id) == 0:
         abort(404)
     return jsonify( { 'window': w_id[0] } )
+
+@app.route('/api/windows/', methods = ['POST'])
+def create_window():
+    if not request.json or not 'gpio' in request.json:
+        abort(400)
+    window =  {
+        'id': windows[-1]['id'] + 1,
+        'type': request.json.get('type', ""),
+        'gpio': request.json['gpio'],
+        'voltage': request.json.get('voltage', ""),
+        'notes': request.json.get('notes', ""),
+        'description': request.json.get('description', ""),
+        'open': False
+    }
+    windows.append(window)
+    return jsonify( {'window': window} ), 201
+
+@app.route('/api/windows/<int:window_id>', methods = ['PUT'])
+def update_window(window_id):
+    window = filter(lambda t: t['id'] == window_id, window)
+    if len(window) == 0:
+        abort(404)
+    if not request.json:
+        abort(400)
+    if 'open' in request.json and type(request.json['open']) is not bool:
+        abort(400)
+    window[0]['id'] = request.json.get('id', window[0]['id'])
+    window[0]['type'] = request.json.get('type', window[0]['type'])
+    window[0]['gpio'] = request.json.get('gpio', window[0]['gpio'])
+    window[0]['voltage'] = request.json.get('voltage', window[0]['voltage'])
+    window[0]['notes'] = request.json.get('notes', window[0]['notes'])
+    window[0]['description'] = request.json.get('description', window[0]['description'])
+    window[0]['open'] = request.json.get('open', window[0]['open'])
+    return jsonify( { 'window': window[0] } )
+
+@app.route('/api/windows/<int:window_id>', methods = ['DELETE'])
+def delete_window(window_id):
+    window = filter(lambda t: t['id'] == window_id, windows)
+    if len(window) == 0:
+        abort(404)
+    windows.remove(window[0])
+    return jsonify( { 'result': True } )
+
 
 # ====================================================================
 # Garage Door                     
@@ -135,13 +221,48 @@ def get_garage_id(garage_id):
         abort(404)
     return jsonify( { 'garage': g_id[0] } )
 
-# ====================================================================
-# Place holder
-# ====================================================================
-@app.route('/api/doors/update/', methods = ['GET'])
-def update_doors():
-    #doors[0]['description'] = 'Garge door up - updated'
-    return "Updating"
+@app.route('/api/garage/', methods = ['POST'])
+def create_garage():
+    if not request.json or not 'gpio' in request.json:
+        abort(400)
+    g_garage = {
+        'id': garage[-1]['id'] + 1,
+        'type': request.json.get('type', ""),
+        'gpio': request.json['gpio'],
+        'voltage': request.json.get('voltage', ""),
+        'notes': request.json.get('notes', ""),
+        'description': request.json.get('description', ""),
+        'active': False,
+        'open': False
+    }
+    garage.append(g_garage)
+    return jsonify( { 'garage': g_garage } ), 201
+
+@app.route('/api/garage/<int:garage_id>', methods = ['PUT'])
+def update_garage(garage_id):
+    g_garage = filter(lambda t: t['id'] == garage_id, g_garage)
+    if len(g_garage) == 0:
+        abort(404)
+    if not request.json:
+        abort(400)
+    if 'open' in request.json and type(request.json['open']) is not bool:
+        abort(400)
+    g_garage[0]['id'] = request.json.get('id', g_garage[0]['id'])
+    g_garage[0]['type'] = request.json.get('type', g_garage[0]['type'])
+    g_garage[0]['gpio'] = request.json.get('gpio', g_garage[0]['gpio'])
+    g_garage[0]['voltage'] = request.json.get('voltage', g_garage[0]['voltage'])
+    g_garage[0]['notes'] = request.json.get('notes', g_garage[0]['notes'])
+    g_garage[0]['description'] = request.json.get('description', g_garage[0]['description'])
+    g_garage[0]['open'] = request.json.get('open', g_garage[0]['open'])
+    return jsonify( { 'garage': g_garage[0] } )
+
+@app.route('/api/garage/<int:garage_id>', methods = ['DELETE'])
+def delete_garage(garage_id):
+    g_garage = filter(lambda t: t['id'] == garage_id, g_garage)
+    if len(g_garage) == 0:
+        abort(404)
+    garage.remove(g_garage[0])
+    return jsonify( { 'result': True } )
 
 # ====================================================================
 # Error Handling
