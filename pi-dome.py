@@ -66,6 +66,7 @@ app = Flask(__name__)
 doors = [
     {
         'id': 1,
+        'key': u'SomeKey',
         'type': u'door',
         'gpio': 11,
         'voltage': 3.3,
@@ -75,6 +76,7 @@ doors = [
     },
     {
         'id': 2,
+        'key': u'SomeKey',
         'type': u'door',
         'gpio': 13,
         'voltage': 3.3,
@@ -87,6 +89,7 @@ doors = [
 windows = [
     {
         'id': 1,
+        'key': u'SomeKey',
         'type': u'window',
         'gpio': 0,
         'voltage': 3.3,
@@ -99,6 +102,7 @@ windows = [
 garage = [
     {
         'id': 1,
+        'key': u'SomeKey',
         'type': u'garage',
         'gpio': 0,
         'voltage': 5,
@@ -107,6 +111,21 @@ garage = [
         'active': False,
         'open': False
     }
+]
+
+temps = [
+    {
+        'id': 1,
+        'key': u'SomeKey',
+        'type': u'temp',
+        'gpio': 0,
+        'voltage': 5,
+        'notes': u'Some notes.',
+        'temp': 0,
+        'description': u'Office temp.',
+        'active': False
+    }
+
 ]
 
 # ====================================================================
@@ -132,6 +151,7 @@ def create_door():
         abort(400)
     door = {
         'id': doors[-1]['id'] + 1,
+        'key': request.json.get('SomeKey', ""),
         'type': request.json.get('type', ""),
         'gpio': request.json['gpio'],
         'voltage': request.json.get('voltage', ""),
@@ -154,6 +174,7 @@ def update_door(door_id):
     if 'open' in request.json and type(request.json['open']) is not bool:
         abort(400)
     door[0]['id'] = request.json.get('id', door[0]['id'])
+    door[0]['key'] = request.json.get('key', door[0]['key'])
     door[0]['type'] = request.json.get('type', door[0]['type'])
     door[0]['gpio'] = request.json.get('gpio', door[0]['gpio'])
     door[0]['voltage'] = request.json.get('voltage', door[0]['voltage'])
@@ -194,6 +215,7 @@ def create_window():
         abort(400)
     window =  {
         'id': windows[-1]['id'] + 1,
+        'key': request.json.get('SomeKey', ""),
         'type': request.json.get('type', ""),
         'gpio': request.json['gpio'],
         'voltage': request.json.get('voltage', ""),
@@ -215,6 +237,7 @@ def update_window(window_id):
     if 'open' in request.json and type(request.json['open']) is not bool:
         abort(400)
     window[0]['id'] = request.json.get('id', window[0]['id'])
+    window[0]['key'] = request.json.get('key', window[0]['key'])
     window[0]['type'] = request.json.get('type', window[0]['type'])
     window[0]['gpio'] = request.json.get('gpio', window[0]['gpio'])
     window[0]['voltage'] = request.json.get('voltage', window[0]['voltage'])
@@ -256,6 +279,7 @@ def create_garage():
         abort(400)
     g_garage = {
         'id': garage[-1]['id'] + 1,
+        'key': request.json.get('SomeKey', ""),
         'type': request.json.get('type', ""),
         'gpio': request.json['gpio'],
         'voltage': request.json.get('voltage', ""),
@@ -278,6 +302,7 @@ def update_garage(garage_id):
     if 'open' in request.json and type(request.json['open']) is not bool:
         abort(400)
     g_garage[0]['id'] = request.json.get('id', g_garage[0]['id'])
+    g_garage[0]['key'] = request.json.get('key', g_garage[0]['key'])
     g_garage[0]['type'] = request.json.get('type', g_garage[0]['type'])
     g_garage[0]['gpio'] = request.json.get('gpio', g_garage[0]['gpio'])
     g_garage[0]['voltage'] = request.json.get('voltage', g_garage[0]['voltage'])
@@ -293,6 +318,72 @@ def delete_garage(garage_id):
     if len(g_garage) == 0:
         abort(404)
     garage.remove(g_garage[0])
+    return jsonify( { 'result': True } )
+
+
+# ====================================================================
+# Temps
+# ====================================================================
+@app.route('/api/temps/', methods = ['GET'])
+@auth.login_required
+def get_temps():
+    return jsonify( { 'temp': temps } )
+
+@app.route('/api/temps/<int:temp_id>', methods = ['GET'])
+@auth.login_required
+def get_temp_id(temp_id):
+    temp = filter(lambda t: t['id'] == temp_id, temps)
+    if len(temp) == 0:
+        abort(404)
+    return jsonify( { 'temp': temp[0] } )
+
+@app.route('/api/temps/', methods = ['POST'])
+@auth.login_required
+def create_temp():
+    if not request.json or not 'gpio' in request.json:
+        abort(400)
+    temp = {
+        'id': garage[-1]['id'] + 1,
+        'key': request.json.get('SomeKey', ""),
+        'type': request.json.get('type', ""),
+        'gpio': request.json['gpio'],
+        'voltage': request.json.get('voltage', ""),
+        'notes': request.json.get('notes', ""),
+        'temp': request.json.get('temp', ""),
+        'description': request.json.get('description', ""),
+        'active': False,
+    }
+    temp.append(temp)
+    return jsonify( { 'temp': temp } ), 201
+
+@app.route('/api/temps/<int:temp_id>', methods = ['PUT'])
+@auth.login_required
+def update_temp(temp_id):
+    temp = filter(lambda t: t['id'] == temp_id, temps)
+    if len(temp) == 0:
+        abort(404)
+    if not request.json:
+        abort(400)
+    if 'open' in request.json and type(request.json['open']) is not bool:
+        abort(400)
+    temp[0]['id'] = request.json.get('id', temp[0]['id'])
+    temp[0]['key'] = request.json.get('key', temp[0]['key'])
+    temp[0]['type'] = request.json.get('type', temp[0]['type'])
+    temp[0]['gpio'] = request.json.get('gpio', temp[0]['gpio'])
+    temp[0]['voltage'] = request.json.get('voltage', temp[0]['voltage'])
+    temp[0]['notes'] = request.json.get('notes', temp[0]['notes'])
+    temp[0]['temp'] = request.json.get('temp', temp[0]['temp'])
+    temp[0]['description'] = request.json.get('description', temp[0]['description'])
+    temp[0]['active'] = request.json.get('open', temp[0]['open'])
+    return jsonify( { 'garage': g_garage[0] } )
+
+@app.route('/api/temps/<int:temp_id>', methods = ['DELETE'])
+@auth.login_required
+def delete_temp(temp_id):
+    temp = filter(lambda t: t['id'] == temp_id, temps)
+    if len(temp) == 0:
+        abort(404)
+    temp.remove(temp[0])
     return jsonify( { 'result': True } )
 
 # ====================================================================

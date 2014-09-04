@@ -3,12 +3,13 @@ pi-dome
 
 Home automation via a python REST api and Raspberry PI
 
-Note: In oder to use this you would install falsk. Please see the following links for details:
+Note: In order to use this you will need to install falsk. Please see the following links for details:
 - [Flask Setup](http://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask)
 - [Flask Mega setup](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
 
-Quick start - [RASPBIN]http://www.raspberrypi.org/downloads/)
+Quick start  
 ------------
+[RASPBIN]http://www.raspberrypi.org/downloads/)
     apt-get install apache2 php5 libapache2-mod-php5 virtualenvwrapper python-virtualenv
 
     - 1) cd /var/
