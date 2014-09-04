@@ -10,8 +10,8 @@ Note: In order to use this you will need to install falsk. Please see the follow
 Quick start  
 ------------
 [RASPBIN]http://www.raspberrypi.org/downloads/)
-    apt-get install apache2 php5 libapache2-mod-php5 virtualenvwrapper python-virtualenv
 
+    - 0) apt-get install apache2 php5 libapache2-mod-php5 virtualenvwrapper python-virtualenv
     - 1) cd /var/
     - 2) mkdir pi-dome
     - 3) cd pi-dome
