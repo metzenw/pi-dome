@@ -1,4 +1,4 @@
-#!flask/bin/python
+#!/usr/bin/python
 # ====================================================================
 # The pi-dome script was a idea I had after seeing a garage door 
 # youtube video where a raspberry pi was used with a 5v relay.
@@ -44,9 +44,13 @@
 # ====================================================================
 
 from flask import Flask, jsonify, abort, make_response, request
-from flask.ext.httpauth import HTTPBasicAuth
+from flask.ext.httpauth import HTTPBasicAuth, HTTPDigestAuth
+
+
+
 
 auth = HTTPBasicAuth()
+@auth.get_password
 def get_password(username):
     if username == "pi-dome":
         return 'pi-dome'
@@ -302,4 +306,4 @@ def not_found(error):
 # Main function
 # ====================================================================
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(host='0.0.0.0')
