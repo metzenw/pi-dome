@@ -1,19 +1,11 @@
 #!/usr/bin/python
 # ====================================================================
 # The pi-dome script was a idea I had after seeing a garage door 
-# youtube video where a raspberry pi was used with a 5v relay.
+# youtube video where a raspberry pi was used with a 5v relay to open
+# the garage over wifi.
 #
 # Copyright (C) 2014 by TekZap Co. 
 # All Rights Reserved.
-#
-# THIS SOFTWARE SCRIPT IS PROVIDED BY TekZap Co.
-# "AS IS" AND IS FOR REFERENCE USE ONLY.  ANY EXPRESS OR IMPLIED 
-# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
-# OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
-# DISCLAIMED. IN NO EVENT SHALL TekZap Co. 
-# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, 
-# OR CONSEQUENTIAL DAMAGES ARISING FROM THE USE THEREOF.
-# ====================================================================
 
 # ====================================================================
 # The MIT License (MIT)
@@ -128,6 +120,30 @@ temps = [
 
 ]
 
+pi_nodes = [
+    {
+        'id': 1,
+        'key': u'SomeKey',
+        'version': u'vB',   #vA, vB, vB+ 
+        'notes': u'Some notes.',
+        'cputemp': 0,
+        'description': u'Garage pi-node.',
+        'active': False
+    }
+]
+
+pi_servers = [
+    {
+        'id': 1,
+        'key': u'SomeKey',
+        'version': u'vB',   #vA, vB, vB+
+        'notes': u'Some notes.',
+        'cputemp': 0,
+        'description': u'Central pi-server.',
+        'active': False
+    }
+]
+
 # ====================================================================
 # Doors 
 # ====================================================================
@@ -151,7 +167,7 @@ def create_door():
         abort(400)
     door = {
         'id': doors[-1]['id'] + 1,
-        'key': request.json.get('SomeKey', ""),
+        'key': request.json['key'],
         'type': request.json.get('type', ""),
         'gpio': request.json['gpio'],
         'voltage': request.json.get('voltage', ""),
@@ -173,7 +189,7 @@ def update_door(door_id):
         abort(400)
     if 'open' in request.json and type(request.json['open']) is not bool:
         abort(400)
-    door[0]['id'] = request.json.get('id', door[0]['id'])
+    #door[0]['id'] = request.json.get('id', door[0]['id'])
     door[0]['key'] = request.json.get('key', door[0]['key'])
     door[0]['type'] = request.json.get('type', door[0]['type'])
     door[0]['gpio'] = request.json.get('gpio', door[0]['gpio'])
@@ -215,7 +231,7 @@ def create_window():
         abort(400)
     window =  {
         'id': windows[-1]['id'] + 1,
-        'key': request.json.get('SomeKey', ""),
+        'key': request.json.get('key', ""),
         'type': request.json.get('type', ""),
         'gpio': request.json['gpio'],
         'voltage': request.json.get('voltage', ""),
@@ -236,7 +252,7 @@ def update_window(window_id):
         abort(400)
     if 'open' in request.json and type(request.json['open']) is not bool:
         abort(400)
-    window[0]['id'] = request.json.get('id', window[0]['id'])
+    #window[0]['id'] = request.json.get('id', window[0]['id'])
     window[0]['key'] = request.json.get('key', window[0]['key'])
     window[0]['type'] = request.json.get('type', window[0]['type'])
     window[0]['gpio'] = request.json.get('gpio', window[0]['gpio'])
@@ -279,7 +295,7 @@ def create_garage():
         abort(400)
     g_garage = {
         'id': garage[-1]['id'] + 1,
-        'key': request.json.get('SomeKey', ""),
+        'key': request.json.get('key', ""),
         'type': request.json.get('type', ""),
         'gpio': request.json['gpio'],
         'voltage': request.json.get('voltage', ""),
@@ -301,7 +317,7 @@ def update_garage(garage_id):
         abort(400)
     if 'open' in request.json and type(request.json['open']) is not bool:
         abort(400)
-    g_garage[0]['id'] = request.json.get('id', g_garage[0]['id'])
+    #g_garage[0]['id'] = request.json.get('id', g_garage[0]['id'])
     g_garage[0]['key'] = request.json.get('key', g_garage[0]['key'])
     g_garage[0]['type'] = request.json.get('type', g_garage[0]['type'])
     g_garage[0]['gpio'] = request.json.get('gpio', g_garage[0]['gpio'])
@@ -344,7 +360,7 @@ def create_temp():
         abort(400)
     temp = {
         'id': temps[-1]['id'] + 1,
-        'key': request.json.get('SomeKey', ""),
+        'key': request.json.get('key', ""),
         'type': request.json.get('type', ""),
         'gpio': request.json['gpio'],
         'voltage': request.json.get('voltage', ""),
@@ -366,7 +382,7 @@ def update_temp(temp_id_put):
         abort(400)
     if 'open' in request.json and type(request.json['open']) is not bool:
         abort(400)
-    temp[0]['id'] = request.json.get('id', temp[0]['id'])
+    #temp[0]['id'] = request.json.get('id', temp[0]['id'])
     temp[0]['key'] = request.json.get('key', temp[0]['key'])
     temp[0]['type'] = request.json.get('type', temp[0]['type'])
     temp[0]['gpio'] = request.json.get('gpio', temp[0]['gpio'])
