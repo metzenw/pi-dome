@@ -332,13 +332,10 @@ def get_temps():
 @app.route('/api/temps/<int:temp_id>', methods = ['GET'])
 @auth.login_required
 def get_temp_id(temp_id):
-    print(temps)
-    temp = filter(lambda t: t['id'] == temp_id, temps)
-    print(temps[temp_id])
-    if len(temp) == 0:
-        print("The length is too small")
+    t_id = filter(lambda t: t['id'] == temp_id, temps)
+    if len(t_id) == 0:
         abort(404)
-    return jsonify( { 'temp': temp[0] } )
+    return jsonify( { 'temp': t_id[0] } )
 
 @app.route('/api/temps/', methods = ['POST'])
 @auth.login_required
@@ -346,7 +343,7 @@ def create_temp():
     if not request.json or not 'gpio' in request.json:
         abort(400)
     temp = {
-        'id': garage[-1]['id'] + 1,
+        'id': temps[-1]['id'] + 1,
         'key': request.json.get('SomeKey', ""),
         'type': request.json.get('type', ""),
         'gpio': request.json['gpio'],
@@ -359,10 +356,10 @@ def create_temp():
     temps.append(temp)
     return jsonify( { 'temp': temp } ), 201
 
-@app.route('/api/temps/<int:temp_id>', methods = ['PUT'])
+@app.route('/api/temps/<int:temp_id_put>', methods = ['PUT'])
 @auth.login_required
-def update_temp(temp_id):
-    temp = filter(lambda t: t['id'] == temp_id, temps)
+def update_temp(temp_id_put):
+    temp = filter(lambda t: t['id'] == temp_id_put, temps)
     if len(temp) == 0:
         abort(404)
     if not request.json:
@@ -380,10 +377,10 @@ def update_temp(temp_id):
     temp[0]['active'] = request.json.get('active', temp[0]['active'])
     return jsonify( { 'temp': temp[0] } )
 
-@app.route('/api/temps/<int:temp_id>', methods = ['DELETE'])
+@app.route('/api/temps/<int:temp_id_del>', methods = ['DELETE'])
 @auth.login_required
 def delete_temp(temp_id):
-    temp = filter(lambda t: t['id'] == temp_id, temps)
+    temp = filter(lambda t: t['id'] == temp_id_del, temps)
     if len(temp) == 0:
         abort(404)
     temps.remove(temp[0])
