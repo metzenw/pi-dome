@@ -327,13 +327,16 @@ def delete_garage(garage_id):
 @app.route('/api/temps/', methods = ['GET'])
 @auth.login_required
 def get_temps():
-    return jsonify( { 'temp': temps } )
+    return jsonify( { 'temps': temps } )
 
 @app.route('/api/temps/<int:temp_id>', methods = ['GET'])
 @auth.login_required
 def get_temp_id(temp_id):
+    print(temps)
     temp = filter(lambda t: t['id'] == temp_id, temps)
+    print(temps[temp_id])
     if len(temp) == 0:
+        print("The length is too small")
         abort(404)
     return jsonify( { 'temp': temp[0] } )
 
@@ -374,7 +377,7 @@ def update_temp(temp_id):
     temp[0]['notes'] = request.json.get('notes', temp[0]['notes'])
     temp[0]['temp'] = request.json.get('temp', temp[0]['temp'])
     temp[0]['description'] = request.json.get('description', temp[0]['description'])
-    temp[0]['active'] = request.json.get('open', temp[0]['open'])
+    temp[0]['active'] = request.json.get('active', temp[0]['active'])
     return jsonify( { 'temp': temp[0] } )
 
 @app.route('/api/temps/<int:temp_id>', methods = ['DELETE'])
