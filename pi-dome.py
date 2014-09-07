@@ -403,6 +403,131 @@ def delete_temp(temp_id):
     return jsonify( { 'result': True } )
 
 # ====================================================================
+# pi_nodes
+# ====================================================================
+@app.route('/api/nodes/', methods = ['GET'])
+@auth.login_required
+def get_nodes():
+    return jsonify( { 'nodes': pi_nodes } )
+
+@app.route('/api/nodes/<int:node_id>', methods = ['GET'])
+@auth.login_required
+def get_node_id(node_id):
+    n_id = filter(lambda t: t['id'] == node_id, pi_nodes)
+    if len(n_id ) == 0:
+        abort(404)
+    return jsonify( { 'node': n_id[0] } )
+
+@app.route('/api/nodes/', methods = ['POST'])
+@auth.login_required
+def create_node():
+    if not request.json or not 'gpio' in request.json:
+        abort(400)
+    node = {
+        'id': pi_nodes[-1]['id'] + 1,
+        'key': request.json['key'],
+        'version': request.json.get('type', ""),
+        'notes': request.json.get('notes', ""),
+        'cputemp': 0,
+        'description': request.json.get('description', ""),
+        'active': False
+    }
+    pi_nodes.append(node)
+    return jsonify( { 'node': node } ), 201
+
+@app.route('/api/nodes/<int:node_id>', methods = ['PUT'])
+@auth.login_required
+def update_node(node_id):
+    node = filter(lambda t: t['id'] == node_id, pi_nodes)
+    if len(node) == 0:
+        abort(404)
+    if not request.json:
+        abort(400)
+    if 'open' in request.json and type(request.json['open']) is not bool:
+        abort(400)
+    #node[0]['id'] = request.json.get('id', node[0]['id'])
+    node[0]['key'] = request.json.get('key', node[0]['key'])
+    node[0]['version'] = request.json.get('version', node[0]['version'])
+    node[0]['notes'] = request.json.get('notes', node[0]['notes'])
+    node[0]['cputemp'] = request.jason.get('cputemp', node[0]['cputemp'])
+    node[0]['description'] = request.json.get('description', node[0]['description'])
+    node[0]['active'] = request.json.get('open', node[0]['active'])
+    return jsonify( { 'node': node[0] } )
+
+@app.route('/api/nodes/<int:node_id>', methods = ['DELETE'])
+@auth.login_required
+def delete_node(node_id):
+    node = filter(lambda t: t['id'] == node_id, pi_nodes)
+    if len(node) == 0:
+        abort(404)
+    pi_nodes.remove(node[0])
+    return jsonify( { 'result': True } )
+
+
+# ====================================================================
+# pi_servers
+# ====================================================================
+@app.route('/api/servers/', methods = ['GET'])
+@auth.login_required
+def get_servers():
+    return jsonify( { 'servers': pi_servers } )
+
+@app.route('/api/servers/<int:server_id>', methods = ['GET'])
+@auth.login_required
+def get_server_id(server_id):
+    n_id = filter(lambda t: t['id'] == server_id, pi_servers)
+    if len(n_id ) == 0:
+        abort(404)
+    return jsonify( { 'server': n_id[0] } )
+
+@app.route('/api/servers/', methods = ['POST'])
+@auth.login_required
+def create_server():
+    if not request.json or not 'gpio' in request.json:
+        abort(400)
+    server = {
+        'id': pi_servers[-1]['id'] + 1,
+        'key': request.json['key'],
+        'version': request.json.get('version', ""),
+        'notes': request.json.get('notes', ""),
+        'cputemp': request.json.get('cputemp', ""), 
+        'description': request.json.get('description', ""),
+        'active': False
+    }
+    pi_servers.append(server)
+    return jsonify( { 'server': server } ), 201
+
+@app.route('/api/servers/<int:server_id>', methods = ['PUT'])
+@auth.login_required
+def update_server(server_id):
+    server = filter(lambda t: t['id'] == server_id, pi_servers)
+    if len(server) == 0:
+        abort(404)
+    if not request.json:
+        abort(400)
+    if 'open' in request.json and type(request.json['open']) is not bool:
+        abort(400)
+    #server[0]['id'] = request.json.get('id', server[0]['id'])
+    server[0]['key'] = request.json.get('key', server[0]['key'])
+    server[0]['version'] = request.json.get('version', server[0]['version'])
+    server[0]['notes'] = request.json.get('notes', server[0]['notes'])
+    server[0]['cputemp'] = request.json.get('cputemp', server[0]['cputemp'])
+    server[0]['description'] = request.json.get('description', server[0]['description'])
+    server[0]['active'] = request.json.get('active', server[0]['active'])
+    return jsonify( { 'server': server[0] } )
+
+@app.route('/api/servers/<int:server_id>', methods = ['DELETE'])
+@auth.login_required
+def delete_server(server_id):
+    server = filter(lambda t: t['id'] == server_id, pi_servers)
+    if len(server) == 0:
+        abort(404)
+    pi_servers.remove(server[0])
+    return jsonify( { 'result': True } )
+
+
+
+# ====================================================================
 # Error Handling
 # ====================================================================
 @app.errorhandler(404)
