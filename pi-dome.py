@@ -351,9 +351,9 @@ def create_temp():
         'notes': request.json.get('notes', ""),
         'temp': request.json.get('temp', ""),
         'description': request.json.get('description', ""),
-        'active': False,
+        'active': False
     }
-    temp.append(temp)
+    temps.append(temp)
     return jsonify( { 'temp': temp } ), 201
 
 @app.route('/api/temps/<int:temp_id>', methods = ['PUT'])
@@ -375,7 +375,7 @@ def update_temp(temp_id):
     temp[0]['temp'] = request.json.get('temp', temp[0]['temp'])
     temp[0]['description'] = request.json.get('description', temp[0]['description'])
     temp[0]['active'] = request.json.get('open', temp[0]['open'])
-    return jsonify( { 'garage': g_garage[0] } )
+    return jsonify( { 'temp': temp[0] } )
 
 @app.route('/api/temps/<int:temp_id>', methods = ['DELETE'])
 @auth.login_required
@@ -383,7 +383,7 @@ def delete_temp(temp_id):
     temp = filter(lambda t: t['id'] == temp_id, temps)
     if len(temp) == 0:
         abort(404)
-    temp.remove(temp[0])
+    temps.remove(temp[0])
     return jsonify( { 'result': True } )
 
 # ====================================================================

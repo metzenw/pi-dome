@@ -36,14 +36,14 @@ gd_closed_state = 1
 g_to_porch_state = 1
 g_to_kitchen_state = 1
 
-gd_open_string = "Garage Door is Open. \n"
-gd_closed_string = "Garage Door is Closed. \n"
-gd_moving_string = "Garage Door moving. \n"
+gd_open_string = "Garage Door is <b>Open</b>. </br>"
+gd_closed_string = "Garage Door is <b>Closed</b>. </br>"
+gd_moving_string = "Garage Door <b>moving</b>. </br>"
 
-door_to_porch_closed_string = "Door from garage to porch is Closed. \n"
-door_to_porch_open_string = "Door  from garage to porch is open. \n"
-door_from_garage_to_kitcken_open_str = "Door from kitchen to garage is open. \n"
-door_from_garage_to_kitchen_closed_str = "Door from kitchen to garage is Closed. \n"
+door_to_porch_closed_string = "Door from garage to porch is <b>Closed</b>. </br>"
+door_to_porch_open_string = "Door  from garage to porch is <b>open</b>. </br>"
+door_from_garage_to_kitcken_open_str = "Door from kitchen to garage is <b>open</b>. </br>"
+door_from_garage_to_kitchen_closed_str = "Door from kitchen to garage is <b>Closed</b>. </br>"
 
 while(1):
         time.sleep(0.6)
