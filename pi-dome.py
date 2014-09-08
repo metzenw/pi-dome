@@ -158,6 +158,7 @@ pi_servers = [
 ]
 
 list_of_keys = []
+list_of_server_keys = []
 
 # ====================================================================
 # Doors 
@@ -165,7 +166,12 @@ list_of_keys = []
 @app.route('/api/doors/', methods = ['GET'])
 @auth.login_required
 def get_doors():
-    return jsonify( { 'doors': doors } )
+    if 'key' in request.args:
+        print(request.args)
+        print(request.args['key'])
+        if request.args['key'] in list_of_server_keys:
+            return jsonify( { 'doors': doors } )
+    return jsonify( { 'error': 'Your key was not authorized' } ), 401
 
 @app.route('/api/doors/<int:door_id>', methods = ['GET'])
 @auth.login_required
@@ -173,7 +179,12 @@ def get_door_id(door_id):
     d_id = filter(lambda t: t['id'] == door_id, doors)
     if len(d_id ) == 0:
         abort(404)
-    return jsonify( { 'door': d_id[0] } )
+    if 'key' in request.args:
+        print(request.args)
+        print(request.args['key'])
+        if request.args['key'] in list_of_server_keys:
+            return jsonify( { 'door': d_id[0] } )
+    return jsonify( { 'error': 'Your key was not authorized' } ), 401
 
 @app.route('/api/doors/', methods = ['POST'])
 @auth.login_required
@@ -604,7 +615,8 @@ def create_server():
     }
     if server['key'] not in list_of_keys:
         pi_servers.append(server)
-        list_of_keys.append(server['key'])
+        #list_of_keys.append(server['key'])
+        list_of_server_keys.append(server['key'])
         return jsonify( { 'server': server } ), 201
     else:
         return jsonify( {'error': 'Key already in use.' } ), 404
