@@ -141,6 +141,8 @@ pi_nodes = [
         'notes': u'Some notes.',
         'cputemp': 0,
         'description': u'Garage pi-node.',
+        'lastupdate': '0',
+        'ip': '',
         'active': False
     }
 ]
@@ -153,6 +155,8 @@ pi_servers = [
         'notes': u'Some notes.',
         'cputemp': 0,
         'description': u'Central pi-server.',
+        'lastupdate': '0',
+        'ip': '',
         'active': False
     }
 ]
@@ -161,15 +165,22 @@ list_of_keys = []
 list_of_server_keys = []
 
 # ====================================================================
+# IP logging
+# ====================================================================
+@app.route("/get_my_ip/", methods=["GET"])
+def get_my_ip():
+    print(request.remote_addr)
+    return jsonify({'ip': request.remote_addr}), 200
+
+# ====================================================================
 # Doors 
 # ====================================================================
 @app.route('/api/doors/', methods = ['GET'])
 @auth.login_required
 def get_doors():
     if 'key' in request.args:
-        print(request.args)
-        print(request.args['key'])
-        if request.args['key'] in list_of_server_keys:
+        #print(request.args['key'])
+        if (request.args['key'] in list_of_server_keys) or (request.args['key'] in list_of_keys):
             return jsonify( { 'doors': doors } )
     return jsonify( { 'error': 'Your key was not authorized' } ), 401
 
@@ -180,9 +191,8 @@ def get_door_id(door_id):
     if len(d_id ) == 0:
         abort(404)
     if 'key' in request.args:
-        print(request.args)
-        print(request.args['key'])
-        if request.args['key'] in list_of_server_keys:
+        #print(request.args['key'])
+        if (request.args['key'] in list_of_server_keys) or (request.args['key'] in list_of_keys):
             return jsonify( { 'door': d_id[0] } )
     return jsonify( { 'error': 'Your key was not authorized' } ), 401
 
@@ -202,7 +212,7 @@ def create_door():
         'active': False,
         'open': False
     }
-    if door['key'] in list_of_keys:
+    if (door['key'] in list_of_keys) or (door['key'] in list_of_server_keys):
         doors.append(door)
         list_of_keys.append(door['key'])
         return jsonify( { 'door': door } ), 201
@@ -219,15 +229,18 @@ def update_door(door_id):
         abort(400)
     if 'open' in request.json and type(request.json['open']) is not bool:
         abort(400)
-    #door[0]['id'] = request.json.get('id', door[0]['id'])
-    door[0]['key'] = request.json.get('key', door[0]['key'])
-    door[0]['type'] = request.json.get('type', door[0]['type'])
-    door[0]['gpio'] = request.json.get('gpio', door[0]['gpio'])
-    door[0]['voltage'] = request.json.get('voltage', door[0]['voltage'])
-    door[0]['notes'] = request.json.get('notes', door[0]['notes'])
-    door[0]['description'] = request.json.get('description', door[0]['description'])
-    door[0]['open'] = request.json.get('open', door[0]['open'])
-    return jsonify( { 'door': door[0] } )
+    if (request.args['key'] in list_of_server_keys) or (request.args['key'] in list_of_keys):
+        #door[0]['id'] = request.json.get('id', door[0]['id'])
+        door[0]['key'] = request.json.get('key', door[0]['key'])
+        door[0]['type'] = request.json.get('type', door[0]['type'])
+        door[0]['gpio'] = request.json.get('gpio', door[0]['gpio'])
+        door[0]['voltage'] = request.json.get('voltage', door[0]['voltage'])
+        door[0]['notes'] = request.json.get('notes', door[0]['notes'])
+        door[0]['description'] = request.json.get('description', door[0]['description'])
+        door[0]['open'] = request.json.get('open', door[0]['open'])
+        return jsonify( { 'door': door[0] } )
+    else: 
+        return jsonify( { 'error': 'Your key was not authorized' } ), 401
 
 @app.route('/api/doors/<int:door_id>', methods = ['DELETE'])
 @auth.login_required
@@ -235,8 +248,11 @@ def delete_door(door_id):
     door = filter(lambda t: t['id'] == door_id, doors)
     if len(door) == 0:
         abort(404)
-    doors.remove(door[0])
-    return jsonify( { 'result': True } )
+    if (request.args['key'] in list_of_server_keys) or (request.args['key'] in list_of_keys):
+        doors.remove(door[0])
+        return jsonify( { 'result': True } )
+    else:
+        return jsonify( { 'error': 'Your key was not authorized' } ), 401
 
 # ====================================================================
 # Windows                     
@@ -536,8 +552,6 @@ def get_node_id(node_id):
 @app.route('/api/nodes/', methods = ['POST'])
 @auth.login_required
 def create_node():
-    if not request.json or not 'gpio' in request.json:
-        abort(400)
     node = {
         'id': pi_nodes[-1]['id'] + 1,
         'key': request.json['key'],
@@ -545,6 +559,8 @@ def create_node():
         'notes': request.json.get('notes', ""),
         'cputemp': 0,
         'description': request.json.get('description', ""),
+        'lastupdate': request.json.get('lastupdate', ""),
+        'ip': request.remote_addr,
         'active': False
     }
     if node['key'] not in list_of_keys: 
@@ -571,6 +587,7 @@ def update_node(node_id):
     node[0]['cputemp'] = request.jason.get('cputemp', node[0]['cputemp'])
     node[0]['description'] = request.json.get('description', node[0]['description'])
     node[0]['active'] = request.json.get('open', node[0]['active'])
+    #node[0]['ip'] = request.remote_addr
     return jsonify( { 'node': node[0] } )
 
 @app.route('/api/nodes/<int:node_id>', methods = ['DELETE'])
@@ -602,8 +619,6 @@ def get_server_id(server_id):
 @app.route('/api/servers/', methods = ['POST'])
 @auth.login_required
 def create_server():
-    if not request.json or not 'gpio' in request.json:
-        abort(400)
     server = {
         'id': pi_servers[-1]['id'] + 1,
         'key': request.json['key'],
@@ -611,6 +626,8 @@ def create_server():
         'notes': request.json.get('notes', ""),
         'cputemp': request.json.get('cputemp', ""), 
         'description': request.json.get('description', ""),
+        'lastupdate': request.json.get('lastupdate', ""),
+        'ip': request.remote_addr,
         'active': False
     }
     if server['key'] not in list_of_keys:
@@ -638,6 +655,7 @@ def update_server(server_id):
     server[0]['cputemp'] = request.json.get('cputemp', server[0]['cputemp'])
     server[0]['description'] = request.json.get('description', server[0]['description'])
     server[0]['active'] = request.json.get('active', server[0]['active'])
+    #server[0]['ip'] = request.remote_addr
     return jsonify( { 'server': server[0] } )
 
 @app.route('/api/servers/<int:server_id>', methods = ['DELETE'])
