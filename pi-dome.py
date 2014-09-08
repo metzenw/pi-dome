@@ -6,6 +6,7 @@
 #
 # Copyright (C) 2014 by TekZap Co. 
 # All Rights Reserved.
+# https://github.com/metzenw/pi-dome
 
 # ====================================================================
 # The MIT License (MIT)
@@ -34,27 +35,53 @@
 # ====================================================================
 # Import from libraries 
 # ====================================================================
+import ConfigParser
 
 from flask import Flask, jsonify, abort, make_response, request
 from flask.ext.httpauth import HTTPBasicAuth, HTTPDigestAuth
 
+# Read in conf file
+config = ConfigParser.ConfigParser()
+config.read('dome.cfg')
 
 
+list_of_keys = []                                      # These are keyed used by nodes.
+list_of_server_keys = []                               # These are key used by pi-dome server (REST) server(s).
+MASTER_KEY = config.get('MASTER', 'MASTER_KEY', 0)   # The master key. One key to rule them all.
+PI_DOME_VERSION = config.get('MASTER', 'VERSION', 0) # Pi-dome version.
+AUTHOR = "Jason Booth"                                 # The author (me).
+AUTHOR_EMAIL = "metzenw at gmail (dot) com"            # My email. Report bugs here or via github.com.
+GIT_REPO = "https://github.com/metzenw/pi-dome"        # Repo address.
 
+# Setting up username and password for http auth user.
+if config.get('MASTER', 'HTTP_AUTH_USER', 0):
+    HTTP_AUTH_USER = config.get('MASTER', 'HTTP_AUTH_USER', 0)
+else:
+    HTTP_AUTH_USER = "pi-dome"
+if config.get('MASTER', 'HTTP_AUTH_PASSWORD', 0):
+    HTTP_AUTH_PASSWORD = config.get('MASTER', 'HTTP_AUTH_PASSWORD', 0)
+else:
+    HTTP_AUTH_PASSWORD = "pi-dome"
+
+# Setup flask
+app = Flask(__name__)
+
+# Setup HTTPAuth
 auth = HTTPBasicAuth()
 @auth.get_password
 def get_password(username):
-    if username == "pi-dome":
-        return 'pi-dome'
+    if username == HTTP_AUTH_USER:
+        return HTTP_AUTH_PASSWORD
     return None
 
+# HTTPAuth failed to access responce
 @auth.error_handler
 def unauthorized():
     return make_response( jsonify( { 'error': 'Unauthorized access' } ), 401 )
 
 
-app = Flask(__name__)
-
+# Supported resources that pi-dome manages.
+# doors, windows, garage, temps, motion_sensors, pi-nodes, pi-servers
 doors = [
     {
         'id': 1,
@@ -161,9 +188,6 @@ pi_servers = [
     }
 ]
 
-list_of_keys = []
-list_of_server_keys = []
-MASTER_KEY = "1234"
 
 # ====================================================================
 # IP logging
