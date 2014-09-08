@@ -144,6 +144,8 @@ pi_servers = [
     }
 ]
 
+list_of_keys = []
+
 # ====================================================================
 # Doors 
 # ====================================================================
@@ -176,8 +178,12 @@ def create_door():
         'active': False,
         'open': False
     }
-    doors.append(door)
-    return jsonify( { 'door': door } ), 201
+    if door['key'] not in list_of_keys:
+        doors.append(door)
+        list_of_keys.append(door['key'])
+        return jsonify( { 'door': door } ), 201
+    else:
+        return jsonify( {'error': 'Key already in use.' } ), 404
 
 @app.route('/api/doors/<int:door_id>', methods = ['PUT'])
 @auth.login_required
@@ -239,8 +245,12 @@ def create_window():
         'description': request.json.get('description', ""),
         'open': False
     }
-    windows.append(window)
-    return jsonify( {'window': window} ), 201
+    if window['key'] not in list_of_keys:
+        windows.append(window)
+        list_of_keys.append(window['key'])
+        return jsonify( { 'window': window } ), 201
+    else:
+        return jsonify( {'error': 'Key already in use.' } ), 404
 
 @app.route('/api/windows/<int:window_id>', methods = ['PUT'])
 @auth.login_required
@@ -304,8 +314,13 @@ def create_garage():
         'active': False,
         'open': False
     }
-    garage.append(g_garage)
-    return jsonify( { 'garage': g_garage } ), 201
+
+    if g_garage['key'] not in list_of_keys:
+        garage.append(g_garage)
+        list_of_keys.append(g_garage['key'])
+        return jsonify( { 'garage': g_garage } ), 201
+    else:
+        return jsonify( {'error': 'Key already in use.' } ), 404
 
 @app.route('/api/garage/<int:garage_id>', methods = ['PUT'])
 @auth.login_required
@@ -369,8 +384,16 @@ def create_temp():
         'description': request.json.get('description', ""),
         'active': False
     }
-    temps.append(temp)
-    return jsonify( { 'temp': temp } ), 201
+
+    if temp['key'] not in list_of_keys:
+        temps.append(temp)
+        list_of_keys.append(temp['key'])
+        return jsonify( { 'temp': temp } ), 201
+    else:
+        return jsonify( {'error': 'Key already in use.' } ), 404
+
+#    temps.append(temp)
+#    return jsonify( { 'temp': temp } ), 201
 
 @app.route('/api/temps/<int:temp_id_put>', methods = ['PUT'])
 @auth.login_required
@@ -432,8 +455,12 @@ def create_node():
         'description': request.json.get('description', ""),
         'active': False
     }
-    pi_nodes.append(node)
-    return jsonify( { 'node': node } ), 201
+    if node['key'] not in list_of_keys: 
+        pi_nodes.append(node)
+        list_of_keys.append(node['key'])
+        return jsonify( { 'node': node } ), 201
+    else:
+        return jsonify( {'error': 'Key already in use.' } ), 404
 
 @app.route('/api/nodes/<int:node_id>', methods = ['PUT'])
 @auth.login_required
@@ -494,8 +521,12 @@ def create_server():
         'description': request.json.get('description', ""),
         'active': False
     }
-    pi_servers.append(server)
-    return jsonify( { 'server': server } ), 201
+    if server['key'] not in list_of_keys:
+        pi_servers.append(server)
+        list_of_keys.append(server['key'])
+        return jsonify( { 'server': server } ), 201
+    else:
+        return jsonify( {'error': 'Key already in use.' } ), 404
 
 @app.route('/api/servers/<int:server_id>', methods = ['PUT'])
 @auth.login_required
