@@ -120,6 +120,19 @@ temps = [
 
 ]
 
+motion_sensors = [
+    {
+        'id': 1,
+        'key': u'SomeKey',
+        'type': u'sensor',
+        'gpio': 0,
+        'voltage': 5,
+        'notes': u'Some notes.',
+        'description': u'Office temp.',
+        'active': False
+    }
+]
+
 pi_nodes = [
     {
         'id': 1,
@@ -178,12 +191,12 @@ def create_door():
         'active': False,
         'open': False
     }
-    if door['key'] not in list_of_keys:
+    if door['key'] in list_of_keys:
         doors.append(door)
         list_of_keys.append(door['key'])
         return jsonify( { 'door': door } ), 201
     else:
-        return jsonify( {'error': 'Key already in use.' } ), 404
+        return jsonify( {'error': 'This node is not registered to add resource.' } ), 404
 
 @app.route('/api/doors/<int:door_id>', methods = ['PUT'])
 @auth.login_required
@@ -245,12 +258,12 @@ def create_window():
         'description': request.json.get('description', ""),
         'open': False
     }
-    if window['key'] not in list_of_keys:
+    if window['key'] in list_of_keys:
         windows.append(window)
         list_of_keys.append(window['key'])
         return jsonify( { 'window': window } ), 201
     else:
-        return jsonify( {'error': 'Key already in use.' } ), 404
+        return jsonify( {'error': 'This node is not registered to add resources.' } ), 404
 
 @app.route('/api/windows/<int:window_id>', methods = ['PUT'])
 @auth.login_required
@@ -315,12 +328,12 @@ def create_garage():
         'open': False
     }
 
-    if g_garage['key'] not in list_of_keys:
+    if g_garage['key'] in list_of_keys:
         garage.append(g_garage)
         list_of_keys.append(g_garage['key'])
         return jsonify( { 'garage': g_garage } ), 201
     else:
-        return jsonify( {'error': 'Key already in use.' } ), 404
+        return jsonify( {'error': 'This node is not registered to add resources.' } ), 404
 
 @app.route('/api/garage/<int:garage_id>', methods = ['PUT'])
 @auth.login_required
@@ -385,12 +398,12 @@ def create_temp():
         'active': False
     }
 
-    if temp['key'] not in list_of_keys:
+    if temp['key'] in list_of_keys:
         temps.append(temp)
         list_of_keys.append(temp['key'])
         return jsonify( { 'temp': temp } ), 201
     else:
-        return jsonify( {'error': 'Key already in use.' } ), 404
+        return jsonify( {'error': 'This node is not registered to add resources.' } ), 404
 
 #    temps.append(temp)
 #    return jsonify( { 'temp': temp } ), 201
@@ -424,6 +437,74 @@ def delete_temp(temp_id):
         abort(404)
     temps.remove(temp[0])
     return jsonify( { 'result': True } )
+
+# ====================================================================
+# Motion Sensors
+# ====================================================================
+@app.route('/api/motions/', methods = ['GET'])
+@auth.login_required
+def get_motions():
+    return jsonify( { 'motions': motion_sensors } )
+
+@app.route('/api/motions/<int:motion_id>', methods = ['GET'])
+@auth.login_required
+def get_motion_id(motion_id):
+    motion = filter(lambda t: t['id'] == motion_id, motion_sensors)
+    if len(motion) == 0:
+        abort(404)
+    return jsonify( { 'motion': motion[0] } )
+
+@app.route('/api/motions/', methods = ['POST'])
+@auth.login_required
+def create_motion():
+    if not request.json or not 'gpio' in request.json:
+        abort(400)
+    motion =  {
+        'id': motion_sensors[-1]['id'] + 1,
+        'key': request.json.get('key', ""),
+        'type': request.json.get('type', ""),
+        'gpio': request.json['gpio'],
+        'voltage': request.json.get('voltage', ""),
+        'notes': request.json.get('notes', ""),
+        'description': request.json.get('description', ""),
+        'active': False
+    }
+    if motion['key'] in list_of_keys:
+        motion_sensors.append(motion)
+        list_of_keys.append(motion['key'])
+        return jsonify( { 'motion': motion } ), 201
+    else:
+        return jsonify( {'error': 'This node is not registered to add resources.' } ), 404
+
+@app.route('/api/motions/<int:motion_id>', methods = ['PUT'])
+@auth.login_required
+def update_motion(motion_id):
+    motion = filter(lambda t: t['id'] == motion_id, motion_sensors)
+    if len(motion) == 0:
+        abort(404)
+    if not request.json:
+        abort(400)
+    if 'open' in request.json and type(request.json['open']) is not bool:
+        abort(400)
+    #motion[0]['id'] = request.json.get('id', motion[0]['id'])
+    motion[0]['key'] = request.json.get('key', motion[0]['key'])
+    motion[0]['type'] = request.json.get('type', motion[0]['type'])
+    motion[0]['gpio'] = request.json.get('gpio', motion[0]['gpio'])
+    motion[0]['voltage'] = request.json.get('voltage', motion[0]['voltage'])
+    motion[0]['notes'] = request.json.get('notes', motion[0]['notes'])
+    motion[0]['description'] = request.json.get('description', motion[0]['description'])
+    motion[0]['active'] = request.json.get('active', motion[0]['active'])
+    return jsonify( { 'motion': motion[0] } )
+
+@app.route('/api/motions/<int:motion_id>', methods = ['DELETE'])
+@auth.login_required
+def delete_motion(motion_id):
+    motion = filter(lambda t: t['id'] == motion_id, motion_sensors)
+    if len(motion) == 0:
+        abort(404)
+    motion_sensors.remove(motion[0])
+    return jsonify( { 'result': True } )
+
 
 # ====================================================================
 # pi_nodes
