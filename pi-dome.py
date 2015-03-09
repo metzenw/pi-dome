@@ -47,8 +47,8 @@ config.read('dome.cfg')
 
 list_of_keys = []                                      # These are keyed used by nodes.
 list_of_server_keys = []                               # These are key used by pi-dome server (REST) server(s).
-MASTER_KEY = config.get('MASTER', 'MASTER_KEY', 0)   # The master key. One key to rule them all.
-PI_DOME_VERSION = config.get('MASTER', 'VERSION', 0) # Pi-dome version.
+MASTER_KEY = config.get('MASTER', 'MASTER_KEY', 0)     # The master key. One key to rule them all.
+PI_DOME_VERSION = config.get('MASTER', 'VERSION', 0)   # Pi-dome version.
 AUTHOR = "Jason Booth"                                 # The author (me).
 AUTHOR_EMAIL = "metzenw at gmail (dot) com"            # My email. Report bugs here or via github.com.
 GIT_REPO = "https://github.com/metzenw/pi-dome"        # Repo address.
@@ -485,9 +485,6 @@ def create_temp():
         return jsonify( { 'temp': temp } ), 201
     else:
         return jsonify( {'error': 'Your key was not authorized' } ), 401
-
-#    temps.append(temp)
-#    return jsonify( { 'temp': temp } ), 201
 
 @app.route('/api/temps/<int:temp_id_put>', methods = ['PUT'])
 @auth.login_required
