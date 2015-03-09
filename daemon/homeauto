@@ -1,0 +1,92 @@
+#!/bin/sh
+#
+#   Copyright (C) 2014-2015 Jason Booth. All Rights Reserved.
+#
+#
+### BEGIN INIT INFO
+# Provides: home_automation
+# Required-Start: $network $local_fs $remote_fs
+# Required-Stop:
+# Should-Start: $syslog 
+# X-UnitedLinux-Default-Enabled: no
+# Default-Start:  3 5
+# Default-Stop:   0 1 2 4 6
+# Description:    home_automation is a service to watch gpio's for events on the pi or odroid.
+### END INIT INFO
+#
+
+##Install with
+#sudo cp homeauto /etc/init.d/
+#sudo chown root:root /etc/init.d/homeauto
+#sudo chmod +x /etc/init.d/homeauto
+#sudo update-rc.d homeauto defaults
+#sudo update-rc.d homeauto enable
+
+#HOME_AUTOMATION_DAEMON=/usr/local/bin/home_auto.py
+HOME_AUTOMATION_DAEMON=/home/odroid/programming/python_daemon/ha.py
+PIDFILE=/var/run/home_automation.pid
+RETVAL=0
+NAME=ha.py
+
+# The start stop for home automation
+# ===========================
+#start-stop-daemon --background --start --exec /home/odroid/programming/python_daemon/ha.py
+#start-stop-daemon --stop --pidfile /tmp/daemon-example.pid
+# ===========================
+
+
+# Source the library functions
+[ -f /lib/lsb/init-functions ] || exit 1
+. /lib/lsb/init-functions
+
+[ -x $HOME_AUTOMATION_DAEMON ] || exit
+
+
+# let see how we were called
+case "$1" in
+	start) 
+		echo -n "Starting home automation. "
+		start_daemon ${HOME_AUTOMATION_DAEMON} $SERVER_ARGS
+		RETVAL=$?
+        	echo
+        	[ $RETVAL -eq 0 ] && touch /var/lock/home_automation.pid
+        	return $RETVAL
+		;;
+	stop)
+		echo -n "Shutting down home automation: "
+		killproc -p $PIDFILE $HOME_AUTOMATION_DAEMON 
+        	RETVAL=$?
+        	echo
+        	[ $RETVAL -eq 0 ] && rm -f /var/lock/home_automation.pid
+        	return $RETVAL
+		;;
+	status)
+		echo -n "Checking home automation: "
+		#checkproc -p $PIDFILE $HOME_AUTOMATION_DAEMON
+                status_of_proc -p "$PIDFILE" "$HOME_AUTOMATION_DAEMON" "$NAME" && exit 0 || exit $?
+        	RETVAL=$?
+        	echo
+        	[ $RETVAL -eq 0 ] && rm -f /var/lock/home_automation.pid
+        	return $RETVAL
+		;;
+	restart)
+		$0 stop
+		sleep 1
+		$0 start
+        	RETVAL=$?
+        	echo
+        	[ $RETVAL -eq 0 ] && rm -f /var/lock/home_automation.pid
+        	return $RETVAL
+		;;
+	try-restart)
+                $0 status >/dev/null && $0 restart
+     		RETVAL=$?
+        	echo
+        	[ $RETVAL -eq 0 ] && rm -f /var/lock/home_automation.pid
+        	return $RETVAL
+                ;;
+	*)
+		echo "Usage: home_automation {start|stop|status|try-restart|restart}"
+		exit 1
+esac
+exit $RETVAL
