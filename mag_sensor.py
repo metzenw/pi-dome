@@ -5,10 +5,10 @@ import RPi.GPIO as GPIO
 import time
 
 GPIO.setmode(GPIO.BOARD)
-gpio11 = 11 #Garage Door Down
-gpio13 = 13 #Garage Door up
-gpio16 = 16 #Door
-gpio18 = 18 #Door
+gpio11 = 12 #Garage Door Down
+gpio13 = 16 #Garage Door up
+gpio16 = 18 #Door Kitchen
+gpio18 = 15 #Door Porch
 
 #GPIO.setup(gpio12, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(gpio11, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
