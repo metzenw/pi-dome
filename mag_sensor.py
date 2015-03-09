@@ -26,7 +26,7 @@ def printMag(channel):
 #GPIO.add_event_detect(gpio13, GPIO.RISING, callback=printMag, bouncetime=1000)
 
 def write_logs(my_str):
-	file = open("/var/www/door.log", "w+")
+	file = open("/var/www/door.log", "w+", 0)
 	file.write(my_str)
 	file.close()
 

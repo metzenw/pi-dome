@@ -150,7 +150,8 @@ class Daemon:
 		daemonized by start() or restart().
 		"""
                 while 1:
-			self.logger.write("INFO:   Running... \n")
+			time.sleep(1)
+			#self.logger.write("INFO:   Running... \n")
                 #self.logger.write("INFO:    Daemon started")
                 #Define how to handel signals
                 #signal.signal(signal.SIGINT,self.signalHandler);

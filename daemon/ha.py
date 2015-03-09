@@ -26,6 +26,8 @@ class MyDaemon(Daemon):
       def write_logs(my_str):
          file = open("/var/www/door.log", "w+", 0)
          file.write(my_str)
+         sys.stdout.flush()
+         sys.stderr.flush()
          file.close()
 
       gd_open_state = 1 

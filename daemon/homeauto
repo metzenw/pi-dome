@@ -23,7 +23,7 @@
 #sudo update-rc.d homeauto enable
 
 #HOME_AUTOMATION_DAEMON=/usr/local/bin/home_auto.py
-HOME_AUTOMATION_DAEMON=/home/odroid/programming/python_daemon/ha.py
+HOME_AUTOMATION_DAEMON=/home/pi/pi-dome/daemon/ha.py
 PIDFILE=/var/run/home_automation.pid
 RETVAL=0
 NAME=ha.py
