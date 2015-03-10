@@ -54,24 +54,31 @@ class MyDaemon(Daemon):
 
          if (GPIO.input(gpio11) == 0 and GPIO.input(gpio13) == 0):
             #print("GarageDoor moving.")
+            self.logger.write("GarageDoor moving.")
             str_to_write = str_to_write + gd_moving_string
          elif (GPIO.input(gpio11) == 1):
             #print("GarageDoor is Closed.")
+            self.logger.write("GarageDoor is Closed.")
             str_to_write = str_to_write + gd_closed_string
          elif (GPIO.input(gpio13) == 1):
             #print("GarageDoor is Open.")
+            self.logger.write("GarageDoor is Open.")
             str_to_write = str_to_write + gd_open_string
          if (GPIO.input(gpio16) == 1):
             #print("Door from kitchen to garage is Closed.")
+            self.logger.write("Door from kitchen to garage is Closed.")
             str_to_write = str_to_write + door_from_garage_to_kitchen_closed_str
          else:
             #print("Door from kitchen to garage is open.")
+            self.logger.write("Door from kitchen to garage is open.")
             str_to_write = str_to_write + door_from_garage_to_kitcken_open_str
          if (GPIO.input(gpio18) == 1):
             #print("Door from garage to porch is Closed.")
+            self.logger.write("Door from garage to porch is Closed.")
             str_to_write = str_to_write + door_to_porch_closed_string
          else:
             #print("Door  from garage to porch is open.")
+            self.logger.write("Door  from garage to porch is open.")
             str_to_write = str_to_write + door_to_porch_open_string 
          #States and logs
          if (GPIO.input(gpio11) != gd_closed_state ):
