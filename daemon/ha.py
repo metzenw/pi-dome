@@ -3,6 +3,7 @@
 import sys, time, signal 
 import RPi.GPIO as GPIO
 from daemon import Daemon
+import datetime
 
 #s_log = open("/tmp/home_automation.log", "a")
 #s_log.write("Opening Log file")
@@ -51,34 +52,41 @@ class MyDaemon(Daemon):
          #self.logger.write("INFO:   Daemon running....\n")
          str_to_write = ""
          write_out_logs = 0
-
+         log_buff = ""
          if (GPIO.input(gpio11) == 0 and GPIO.input(gpio13) == 0):
             #print("GarageDoor moving.")
-            self.logger.write("GarageDoor moving.")
+            #self.logger.write("GarageDoor moving.")
+            log_buff = log_buff + "INFO:   GarageDoor moving. \n"
             str_to_write = str_to_write + gd_moving_string
          elif (GPIO.input(gpio11) == 1):
             #print("GarageDoor is Closed.")
-            self.logger.write("GarageDoor is Closed.")
+            #self.logger.write("GarageDoor is Closed.")
+            log_buff = log_buff + "INFO:   GarageDoor is Closed. \n"
             str_to_write = str_to_write + gd_closed_string
          elif (GPIO.input(gpio13) == 1):
             #print("GarageDoor is Open.")
-            self.logger.write("GarageDoor is Open.")
+            #self.logger.write("GarageDoor is Open.")
+            log_buff = log_buff + "INFO:   GarageDoor is Open. \n"
             str_to_write = str_to_write + gd_open_string
          if (GPIO.input(gpio16) == 1):
             #print("Door from kitchen to garage is Closed.")
-            self.logger.write("Door from kitchen to garage is Closed.")
+            #self.logger.write("Door from kitchen to garage is Closed.")
+            log_buff = log_buff + "INFO:   Door from kitchen to garage is Closed. \n"
             str_to_write = str_to_write + door_from_garage_to_kitchen_closed_str
          else:
             #print("Door from kitchen to garage is open.")
-            self.logger.write("Door from kitchen to garage is open.")
+            #self.logger.write("Door from kitchen to garage is open.")
+            log_buff = log_buff + "INFO:   Door from kitchen to garage is open. \n"
             str_to_write = str_to_write + door_from_garage_to_kitcken_open_str
          if (GPIO.input(gpio18) == 1):
             #print("Door from garage to porch is Closed.")
-            self.logger.write("Door from garage to porch is Closed.")
+            #self.logger.write("Door from garage to porch is Closed.")
+            log_buff = log_buff + "INFO:   Door from garage to porch is Closed. \n"
             str_to_write = str_to_write + door_to_porch_closed_string
          else:
             #print("Door  from garage to porch is open.")
-            self.logger.write("Door  from garage to porch is open.")
+            #self.logger.write("Door  from garage to porch is open.")
+            log_buff = log_buff + "INFO:   Door from garage to porch is open.\n "
             str_to_write = str_to_write + door_to_porch_open_string 
          #States and logs
          if (GPIO.input(gpio11) != gd_closed_state ):
@@ -98,6 +106,14 @@ class MyDaemon(Daemon):
          if (write_out_logs == 1):
             #print("Writing to logs.")
             write_logs(str_to_write)
+            time_now = datetime.datetime.now()
+            diag_date = "{0}-{1}-{2}_{3}-{4}-{5}".format(str(time_now.year), str(time_now.month),
+                        str(time_now.day), str(time_now.hour), str(time_now.minute),
+                        str(time_now.second))
+            diag_date = diag_date + ":   "+ log_buff
+            log_buff = diag_date
+            self.logger.write(log_buff)
+            
 
 if __name__ == "__main__":
    daemon = MyDaemon('/var/run/home_automation.pid')
