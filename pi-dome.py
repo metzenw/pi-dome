@@ -748,4 +748,5 @@ def not_found(error):
 # Main function
 # ====================================================================
 if __name__ == '__main__':
+    print ("Starting Flask \n")
     app.run(host='0.0.0.0')
