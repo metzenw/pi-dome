@@ -45,9 +45,6 @@ config = ConfigParser.ConfigParser()
 config.read('dome.cfg')
 
 
-list_of_keys = []                                      # These are keyed used by nodes.
-list_of_server_keys = []                               # These are key used by pi-dome server (REST) server(s).
-MASTER_KEY = config.get('MASTER', 'MASTER_KEY', 0)     # The master key. One key to rule them all.
 PI_DOME_VERSION = config.get('MASTER', 'VERSION', 0)   # Pi-dome version.
 AUTHOR = "Jason Booth"                                 # The author (me).
 AUTHOR_EMAIL = "metzenw at gmail (dot) com"            # My email. Report bugs here or via github.com.
@@ -85,7 +82,6 @@ def unauthorized():
 doors = [
     {
         'id': 1,
-        'key': u'SomeKey',
         'type': u'door',
         'gpio': 11,
         'voltage': 3.3,
@@ -95,7 +91,6 @@ doors = [
     },
     {
         'id': 2,
-        'key': u'SomeKey',
         'type': u'door',
         'gpio': 13,
         'voltage': 3.3,
@@ -108,7 +103,6 @@ doors = [
 windows = [
     {
         'id': 1,
-        'key': u'SomeKey',
         'type': u'window',
         'gpio': 0,
         'voltage': 3.3,
@@ -121,7 +115,6 @@ windows = [
 garage = [
     {
         'id': 1,
-        'key': u'SomeKey',
         'type': u'garage',
         'gpio': 0,
         'voltage': 5,
@@ -135,7 +128,6 @@ garage = [
 temps = [
     {
         'id': 1,
-        'key': u'SomeKey',
         'type': u'temp',
         'gpio': 0,
         'voltage': 5,
@@ -150,7 +142,6 @@ temps = [
 motion_sensors = [
     {
         'id': 1,
-        'key': u'SomeKey',
         'type': u'sensor',
         'gpio': 0,
         'voltage': 5,
@@ -163,7 +154,6 @@ motion_sensors = [
 pi_nodes = [
     {
         'id': 1,
-        'key': u'SomeKey',
         'version': u'vB',   #vA, vB, vB+ 
         'notes': u'Some notes.',
         'cputemp': 0,
@@ -177,7 +167,6 @@ pi_nodes = [
 pi_servers = [
     {
         'id': 1,
-        'key': u'SomeKey',
         'version': u'vB',   #vA, vB, vB+
         'notes': u'Some notes.',
         'cputemp': 0,
@@ -229,7 +218,6 @@ def create_door():
         'open': False
     }
     doors.append(door)
-    list_of_keys.append(door['key'])
     return jsonify( { 'door': door } ), 201
 
 @app.route('/api/doors/<int:door_id>', methods = ['PUT'])
@@ -242,7 +230,6 @@ def update_door(door_id):
         abort(400)
     if 'open' in request.json and type(request.json['open']) is not bool:
         abort(400)
-    door[0]['key'] = request.json.get('key', door[0]['key'])
     door[0]['type'] = request.json.get('type', door[0]['type'])
     door[0]['gpio'] = request.json.get('gpio', door[0]['gpio'])
     door[0]['voltage'] = request.json.get('voltage', door[0]['voltage'])
@@ -291,7 +278,6 @@ def create_window():
         'open': False
     }
     windows.append(window)
-    list_of_keys.append(window['key'])
     return jsonify( { 'window': window } ), 201
 
 @app.route('/api/windows/<int:window_id>', methods = ['PUT'])
@@ -328,10 +314,7 @@ def delete_window(window_id):
 @app.route('/api/garage/', methods = ['GET'])
 @auth.login_required
 def get_garage():
-    if (request.args['key'] in list_of_server_keys) or (request.args['key'] in list_of_keys) or (request.args['key'] == MASTER_KEY):
-        return jsonify( { 'garage': garage } )
-    else:
-        return jsonify( {'error': 'Your key was not authorized' } ), 401
+    return jsonify( { 'garage': garage } )
 
 @app.route('/api/garage/<int:garage_id>', methods = ['GET'])
 @auth.login_required
@@ -358,7 +341,6 @@ def create_garage():
     }
 
     garage.append(g_garage)
-    list_of_keys.append(g_garage['key'])
     return jsonify( { 'garage': g_garage } ), 201
 
 @app.route('/api/garage/<int:garage_id>', methods = ['PUT'])
@@ -371,7 +353,6 @@ def update_garage(garage_id):
         abort(400)
     if 'open' in request.json and type(request.json['open']) is not bool:
         abort(400)
-    g_garage[0]['key'] = request.json.get('key', g_garage[0]['key'])
     g_garage[0]['type'] = request.json.get('type', g_garage[0]['type'])
     g_garage[0]['gpio'] = request.json.get('gpio', g_garage[0]['gpio'])
     g_garage[0]['voltage'] = request.json.get('voltage', g_garage[0]['voltage'])
@@ -422,7 +403,6 @@ def create_temp():
     }
 
     temps.append(temp)
-    list_of_keys.append(temp['key'])
     return jsonify( { 'temp': temp } ), 201
 
 @app.route('/api/temps/<int:temp_id_put>', methods = ['PUT'])
@@ -484,7 +464,6 @@ def create_motion():
         'active': False
     }
     motion_sensors.append(motion)
-    list_of_keys.append(motion['key'])
     return jsonify( { 'motion': motion } ), 201
 
 @app.route('/api/motions/<int:motion_id>', methods = ['PUT'])
@@ -604,8 +583,6 @@ def create_server():
         'active': False
     }
     pi_servers.append(server)
-    #list_of_keys.append(server['key'])
-    list_of_server_keys.append(server['key'])
     return jsonify( { 'server': server } ), 201
 
 @app.route('/api/servers/<int:server_id>', methods = ['PUT'])
