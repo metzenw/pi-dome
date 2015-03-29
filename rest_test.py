@@ -3,6 +3,13 @@ import httplib
 import base64
 import string
 import json
+
+def post(base, port, url):
+        conn = httplib.HTTPConnection(base, port, timeout=60)
+        conn.request('POST', url, None, { 'Authorization' : 'Basic '+string.strip(base64.encodestring('pi-dome:pi-dome'))})
+        return conn.getresponse().read()
+
+
 def get(base, port, url):
 	conn = httplib.HTTPConnection(base, port, timeout=60)
 	conn.request('GET', url, None, { 'Authorization' : 'Basic '+string.strip(base64.encodestring('pi-dome:pi-dome'))})
