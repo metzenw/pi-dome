@@ -18,6 +18,7 @@ class MyDaemon(Daemon):
       gpio04 = 7  #Sensor      
       gpio11 = 23 #Front Door motion sensor
       gpio09 = 21 #Fron door door sensor
+      gpio08 = 24 #Living room motion sensor
 
       #GPIO.setup(gpio12, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
       GPIO.setup(gpio18, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
@@ -27,6 +28,7 @@ class MyDaemon(Daemon):
       GPIO.setup(gpio04, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
       GPIO.setup(gpio11, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
       GPIO.setup(gpio09, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+      GPIO.setup(gpio08, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
       def printMag(channel):
          self.logger.write("INFO:   Mag intact:   " + channel)
@@ -49,6 +51,13 @@ class MyDaemon(Daemon):
 
       #Front door door sensor
       fd_door_sensor = 1
+   
+      #Livingroom motion sensor 
+      lr_motion_sensor_state = 1
+
+      #Livingroom motion text
+      lr_active_string = "Living room sensor <b>Active</b>. </br>"
+      lr_inactive_string = "Living room sensor <b>In-active</b>. </br>" 
 
       gd_open_string = "Garage Door is <b>Open</b>. </br>"
       gd_closed_string = "Garage Door is <b>Closed</b>. </br>"
@@ -59,11 +68,13 @@ class MyDaemon(Daemon):
       sensor_inactive = "Garage sensor <b>In-active</b>. </br>"
 
       #Motion Sensor front door
-      front_door_motion_sensor_active = "Front door motion <b>Active</b>. </br>"
+      audio_play = "<audio controls autoplay><source src=\"door_bell.wav\" type=\"audio/wav\"></audio>"
+      front_door_motion_sensor_active = "Front door motion <b>Active</b>. </br>" + audio_play
       front_door_motion_sensor_inactive = "Front door motion <b>In-active</b>. </br>"
 
-      front_door_closed = "Front door <b>Closed</b>"
-      front_door_open = "Front door <b>Open</b>"      
+      front_door_closed = "Front door <b>Closed</b> </br>"
+      audio_play2 = "<audio controls autoplay><source src=\"front_door.wav\" type=\"audio/wav\"></audio>"
+      front_door_open = "Front door <b>Open</b> </br>" +  audio_play2     
 
       door_to_porch_closed_string = "Door from garage to porch is <b>Closed</b>. </br>"
       door_to_porch_open_string = "Door  from garage to porch is <b>open</b>. </br>"
@@ -137,6 +148,15 @@ class MyDaemon(Daemon):
             log_buff = log_buff + "INFO:   Front door open.\n "
             str_to_write = str_to_write + front_door_open
 
+         #Living room motion sensor
+         if(GPIO.input(gpio08) == 1):
+            log_buff = log_buff + "INFO:   Living room sensor active. \n"
+            str_to_write = str_to_write + lr_active_string
+         else:
+            log_buff = log_buff + "INFO:   Living room sensor in-active.\n "
+            str_to_write = str_to_write + lr_inactive_string
+
+
          #States and logs
          if (GPIO.input(gpio18) != gd_closed_state ):
             write_out_logs = 1
@@ -159,7 +179,9 @@ class MyDaemon(Daemon):
          elif ( GPIO.input(gpio09) != fd_door_sensor ):
             write_out_logs = 1
             fd_door_sensor = GPIO.input(gpio09)
-		
+         elif ( GPIO.input(gpio08) != lr_motion_sensor_state ):
+            write_out_logs = 1
+            lr_motion_sensor_state = GPIO.input(gpio08)	
 
          if (write_out_logs == 1):
             #print("Writing to logs.")
