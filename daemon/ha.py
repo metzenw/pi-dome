@@ -17,6 +17,7 @@ class MyDaemon(Daemon):
       gpio22 = 15 #Door Porch
       gpio04 = 7  #Sensor      
       gpio11 = 23 #Front Door motion sensor
+      gpio09 = 21 #Fron door door sensor
 
       #GPIO.setup(gpio12, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
       GPIO.setup(gpio18, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
@@ -25,6 +26,7 @@ class MyDaemon(Daemon):
       GPIO.setup(gpio22, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
       GPIO.setup(gpio04, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
       GPIO.setup(gpio11, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+      GPIO.setup(gpio09, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
       def printMag(channel):
          self.logger.write("INFO:   Mag intact:   " + channel)
@@ -45,6 +47,9 @@ class MyDaemon(Daemon):
       g_sensor_state = 1
       fd_motion_sensor_state = 1
 
+      #Front door door sensor
+      fd_door_sensor = 1
+
       gd_open_string = "Garage Door is <b>Open</b>. </br>"
       gd_closed_string = "Garage Door is <b>Closed</b>. </br>"
       gd_moving_string = "Garage Door <b>moving</b>. </br>"
@@ -56,6 +61,9 @@ class MyDaemon(Daemon):
       #Motion Sensor front door
       front_door_motion_sensor_active = "Front door motion <b>Active</b>. </br>"
       front_door_motion_sensor_inactive = "Front door motion <b>In-active</b>. </br>"
+
+      front_door_closed = "Front door <b>Closed</b>"
+      front_door_open = "Front door <b>Open</b>"      
 
       door_to_porch_closed_string = "Door from garage to porch is <b>Closed</b>. </br>"
       door_to_porch_open_string = "Door  from garage to porch is <b>open</b>. </br>"
@@ -121,6 +129,14 @@ class MyDaemon(Daemon):
             log_buff = log_buff + "INFO:   Front door motion in-active.\n "
             str_to_write = str_to_write + front_door_motion_sensor_inactive
 
+         #Front door door sensor
+         if(GPIO.input(gpio09) == 1):
+            log_buff = log_buff + "INFO:   Front door closed. \n"
+            str_to_write = str_to_write + front_door_closed
+         else:
+            log_buff = log_buff + "INFO:   Front door open.\n "
+            str_to_write = str_to_write + front_door_open
+
          #States and logs
          if (GPIO.input(gpio18) != gd_closed_state ):
             write_out_logs = 1
@@ -139,8 +155,10 @@ class MyDaemon(Daemon):
             g_sensor_state = GPIO.input(gpio04)
          elif ( GPIO.input(gpio11) != fd_motion_sensor_state ):
             write_out_logs = 1
-            fd_motion_sensor_state = GPIO.input(gpio11)
-
+            fd_motion_sensor_state = GPIO.input(gpio09)
+         elif ( GPIO.input(gpio09) != fd_door_sensor ):
+            write_out_logs = 1
+            fd_door_sensor = GPIO.input(gpio09)
 		
 
          if (write_out_logs == 1):
