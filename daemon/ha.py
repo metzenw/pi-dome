@@ -56,12 +56,14 @@ class MyDaemon(Daemon):
       lr_motion_sensor_state = 1
 
       #Livingroom motion text
-      lr_active_string = "Living room sensor <b>Active</b>. </br>"
+      lr_audio_active = "<audio controls autoplay><source src=\"foot_steps.ogg\" type=\"audio/ogg\"></audio>"
+      lr_active_string = "Living room sensor <b>Active</b>. </br>" + lr_audio_active
       lr_inactive_string = "Living room sensor <b>In-active</b>. </br>" 
-
+      
+      gd_open_sound = "<audio controls autoplay><source src=\"gd_open.ogg\" type=\"audio/ogg\"></audio>"
       gd_open_string = "Garage Door is <b>Open</b>. </br>"
       gd_closed_string = "Garage Door is <b>Closed</b>. </br>"
-      gd_moving_string = "Garage Door <b>moving</b>. </br>"
+      gd_moving_string = "Garage Door <b>moving</b>. </br>" + gd_open_sound
 
       #Motion Sensor garage
       sensor_active = "Garage sensor <b>Active</b>. </br>"
@@ -73,7 +75,7 @@ class MyDaemon(Daemon):
       front_door_motion_sensor_inactive = "Front door motion <b>In-active</b>. </br>"
 
       front_door_closed = "Front door <b>Closed</b> </br>"
-      audio_play2 = "<audio controls autoplay><source src=\"front_door.wav\" type=\"audio/wav\"></audio>"
+      audio_play2 = "<audio controls autoplay><source src=\"front_door.ogg\" type=\"audio/ogg\"></audio>"
       front_door_open = "Front door <b>Open</b> </br>" +  audio_play2     
 
       door_to_porch_closed_string = "Door from garage to porch is <b>Closed</b>. </br>"
