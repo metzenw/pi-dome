@@ -8,6 +8,7 @@ class PInode:
   #'Common base class for PInodes'#
    def __init__(self):
       self.mac = ""
+      self.model = ""
       self.hostname = ""
       self.uuid = ""
       self.gpio = {
@@ -16,10 +17,314 @@ class PInode:
                      'gpio_setting': u'<PUD_DOWN|PUD_UP>',
                      'active': False,
                      'action': u'<script>',
+                     'type': u'3v',
+                     'description': u'The GPIO outputs continuous 3 volts.'
+                     },
+                  '2':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'5v',
+                     'description': u'The GPIO outputs continuous 5 volts.'
+                     },
+                  '3':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
                      'description': u'The GPIO handels action request for a door.'
                      },
-                  '2':
+                  '4':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '5':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '6':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '7':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '8':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '9':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '10':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '11':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '12':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '13':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '14':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '15':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '16':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '17':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '18':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '19':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '20':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '21':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '22':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '23':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '24':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '25':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '26':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '27':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '28':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '29':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '30':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '31':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '32':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '33':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '34':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '35':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '36':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '37':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '38':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '39':
+                     {
+                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'active': False,
+                     'action': u'<script>',
+                     'type': u'<door|window|action|motion_sensor>',
+                     'description': u'The GPIO handels action request for a door.'
+                     },
+                  '40':
                      {
                      'gpio_setting': u'<PUD_DOWN|PUD_UP>',
                      'active': False,
