@@ -10,11 +10,12 @@ class PInode:
       self.mac = ""
       self.model = ""
       self.hostname = ""
-      self.uuid = ""
+      self.uuid = "i"
+      #All GPIO numbers are board pin numbers.
       self.gpio = {
                   '1':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'3v',
                      'active': False,
                      'action': u'<script>',
                      'type': u'3v',
@@ -22,7 +23,7 @@ class PInode:
                      },
                   '2':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'5v',
                      'active': False,
                      'action': u'<script>',
                      'type': u'5v',
@@ -38,11 +39,11 @@ class PInode:
                      },
                   '4':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'5v',
                      'active': False,
                      'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'type': u'5v',
+                     'description': u'The GPIO outputs continuous 5 volts.'
                      },
                   '5':
                      {
@@ -54,11 +55,11 @@ class PInode:
                      },
                   '6':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'Ground',
                      'active': False,
                      'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'type': u'Ground',
+                     'description': u'The GPIO is for ground.'
                      },
                   '7':
                      {
@@ -78,11 +79,11 @@ class PInode:
                      },
                   '9':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'Ground',
                      'active': False,
                      'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'type': u'Ground',
+                     'description': u'The GPIO is for ground.'
                      },
                   '10':
                      {
@@ -118,11 +119,11 @@ class PInode:
                      },
                   '14':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'Ground',
                      'active': False,
                      'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'type': u'Ground',
+                     'description': u'The GPIO is for ground.'
                      },
                   '15':
                      {
@@ -142,11 +143,11 @@ class PInode:
                      },
                   '17':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'3v',
                      'active': False,
                      'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'type': u'3v',
+                     'description': u'The GPIO delivers 3v continuously.'
                      },
                   '18':
                      {
@@ -166,11 +167,11 @@ class PInode:
                      },
                   '20':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'Ground',
                      'active': False,
                      'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'type': u'Ground',
+                     'description': u'The GPIO is for ground.'
                      },
                   '21':
                      {
@@ -206,11 +207,11 @@ class PInode:
                      },
                   '25':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'Ground',
                      'active': False,
                      'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'type': u'Ground',
+                     'description': u'The GPIO is for ground.'
                      },
                   '26':
                      {
@@ -222,19 +223,19 @@ class PInode:
                      },
                   '27':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'DNC',
                      'active': False,
                      'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'type': u'DNC',
+                     'description': u'DO NOT CONNECT!'
                      },
                   '28':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'DNC',
                      'active': False,
                      'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'type': u'DNC',
+                     'description': u'DO NOT CONNECT!'
                      },
                   '29':
                      {
@@ -246,11 +247,11 @@ class PInode:
                      },
                   '30':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'Ground',
                      'active': False,
                      'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'type': u'Ground',
+                     'description': u'The GPIO is for ground.'
                      },
                   '31':
                      {
@@ -278,11 +279,11 @@ class PInode:
                      },
                   '34':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'Ground',
                      'active': False,
                      'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'type': u'Ground',
+                     'description': u'The GPIO is for ground.'
                      },
                   '35':
                      {
@@ -318,11 +319,11 @@ class PInode:
                      },
                   '39':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'Ground',
                      'active': False,
                      'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'type': u'Ground',
+                     'description': u'The GPIO is for ground.'
                      },
                   '40':
                      {
