@@ -3,7 +3,6 @@ from lib.PInode import *
 import lib.PIgeneral as PIgeneral
 
 
-
 # ====================================================================
 # Main entry into the pi-server
 # ====================================================================

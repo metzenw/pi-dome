@@ -9,6 +9,7 @@ import threading
 import time
 import datetime
 import tarfile
+import imp
 
 # ====================================================================
 # Walk the os directory and find file dates and mtime
@@ -184,4 +185,12 @@ def find_between(s, first, last):
     except ValueError:
         return ""
 
-
+# ====================================================================
+# Function to test if a module is installed.
+# ====================================================================
+def module_exists(module_name):
+   try:
+      imp.find_module(module_name)
+      return True
+   except ImportError:
+      return False
