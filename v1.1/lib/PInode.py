@@ -3,6 +3,10 @@
 #Libraries
 import socket
 import uuid
+import re
+import PIgeneral as PIgeneral
+if PIgeneral.module_exists("RPi.GPIO"):
+   import RPi.GPIO as GPIO
 
 class PInode:
   #'Common base class for PInodes'#
@@ -10,7 +14,7 @@ class PInode:
       self.mac = ""
       self.model = ""
       self.hostname = ""
-      self.uuid = "i"
+      self.uuid = ""
       #All GPIO numbers are board pin numbers.
       self.gpio = {
                   '1':
@@ -31,7 +35,7 @@ class PInode:
                      },
                   '3':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -47,7 +51,7 @@ class PInode:
                      },
                   '5':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -63,7 +67,7 @@ class PInode:
                      },
                   '7':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -71,7 +75,7 @@ class PInode:
                      },
                   '8':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -87,7 +91,7 @@ class PInode:
                      },
                   '10':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -95,7 +99,7 @@ class PInode:
                      },
                   '11':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -103,7 +107,7 @@ class PInode:
                      },
                   '12':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -111,7 +115,7 @@ class PInode:
                      },
                   '13':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -127,7 +131,7 @@ class PInode:
                      },
                   '15':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -135,7 +139,7 @@ class PInode:
                      },
                   '16':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -151,7 +155,7 @@ class PInode:
                      },
                   '18':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -159,7 +163,7 @@ class PInode:
                      },
                   '19':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -175,7 +179,7 @@ class PInode:
                      },
                   '21':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -183,7 +187,7 @@ class PInode:
                      },
                   '22':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -191,7 +195,7 @@ class PInode:
                      },
                   '23':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -199,7 +203,7 @@ class PInode:
                      },
                   '24':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -215,7 +219,7 @@ class PInode:
                      },
                   '26':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -239,7 +243,7 @@ class PInode:
                      },
                   '29':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -255,7 +259,7 @@ class PInode:
                      },
                   '31':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -263,7 +267,7 @@ class PInode:
                      },
                   '32':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -271,7 +275,7 @@ class PInode:
                      },
                   '33':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -287,7 +291,7 @@ class PInode:
                      },
                   '35':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -295,7 +299,7 @@ class PInode:
                      },
                   '36':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -303,7 +307,7 @@ class PInode:
                      },
                   '37':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -311,7 +315,7 @@ class PInode:
                      },
                   '38':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -327,7 +331,7 @@ class PInode:
                      },
                   '40':
                      {
-                     'gpio_setting': u'<PUD_DOWN|PUD_UP>',
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -358,8 +362,18 @@ class PInode:
       print("Retrieving hostname.")
       self.hostname = socket.gethostname()
 
-
-
+   # ====================================================================
+   #  Setup GPIOs
+   # ====================================================================
+   def setup_gpio(self):
+      print("Setting up GPIOs.")
+      for key in self.gpio:
+         match = re.search(r'PUD_DOWN', self.gpio[key]["gpio_setting"])
+         if match:
+            GPIO.setup(key, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+         match = re.search(r'PUD_UP', self.gpio[key]["gpio_setting"])
+         if match:
+            GPIO.setup(key, GPIO.OUT)
 
 
 
