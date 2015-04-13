@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+RPI_FOUND = False
+
 #Libraries
 import socket
 import uuid
@@ -7,6 +9,7 @@ import re
 import PIgeneral as PIgeneral
 if PIgeneral.module_exists("RPi.GPIO"):
    import RPi.GPIO as GPIO
+   RPI_FOUND = True
 
 class PInode:
   #'Common base class for PInodes'#
@@ -347,6 +350,7 @@ class PInode:
       print("Init.")
       self.generate_uuid()
       self.get_hostname()
+      self.setup_gpio()
 
    # ====================================================================
    #  Generate a unique name to be tracked by the server.
@@ -367,13 +371,14 @@ class PInode:
    # ====================================================================
    def setup_gpio(self):
       print("Setting up GPIOs.")
-      for key in self.gpio:
-         match = re.search(r'PUD_DOWN', self.gpio[key]["gpio_setting"])
-         if match:
-            GPIO.setup(key, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-         match = re.search(r'PUD_UP', self.gpio[key]["gpio_setting"])
-         if match:
-            GPIO.setup(key, GPIO.OUT)
+      if RPI_FOUND:
+         for key in self.gpio:
+            match = re.search(r'PUD_DOWN', self.gpio[key]["gpio_setting"])
+            if match:
+               GPIO.setup(key, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+            match = re.search(r'PUD_UP', self.gpio[key]["gpio_setting"])
+            if match:
+               GPIO.setup(key, GPIO.OUT)
 
 
 
