@@ -7,9 +7,18 @@ import socket
 import uuid
 import re
 import PIgeneral as PIgeneral
+print(PIgeneral.module_exists('RPi.GPIO'))
 if PIgeneral.module_exists("RPi.GPIO"):
    import RPi.GPIO as GPIO
+   print("RPi found!")
    RPI_FOUND = True
+
+try:
+   import RPi.GPIO as GPIO
+   RPI_FOUND = True
+except ImportError:
+   RPI_FOUND = False
+   
 
 class PInode:
   #'Common base class for PInodes'#
@@ -372,13 +381,16 @@ class PInode:
    def setup_gpio(self):
       print("Setting up GPIOs.")
       if RPI_FOUND:
+         GPIO.setmode(GPIO.BOARD) #Pin number
+         print("Found a PI")
          for key in self.gpio:
             match = re.search(r'PUD_DOWN', self.gpio[key]["gpio_setting"])
             if match:
-               GPIO.setup(key, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+               GPIO.setup(int(key), GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+               print("Setting down on " + key)
             match = re.search(r'PUD_UP', self.gpio[key]["gpio_setting"])
             if match:
-               GPIO.setup(key, GPIO.OUT)
+               GPIO.setup(int(key), GPIO.OUT)
 
 
 
