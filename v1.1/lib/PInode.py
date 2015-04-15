@@ -75,7 +75,7 @@ class PInode:
                      },
                   '7':
                      {
-                     'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
+                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
