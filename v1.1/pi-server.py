@@ -8,7 +8,7 @@ import lib.PIgeneral as PIgeneral
 # ====================================================================
 def main():
     pi_node = PInode()
-    pi_node.init()
+    pi_node.init("server")
 
 if __name__ == '__main__':
     main()

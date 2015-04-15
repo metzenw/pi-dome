@@ -7,11 +7,6 @@ import socket
 import uuid
 import re
 import PIgeneral as PIgeneral
-print(PIgeneral.module_exists('RPi.GPIO'))
-if PIgeneral.module_exists("RPi.GPIO"):
-   import RPi.GPIO as GPIO
-   print("RPi found!")
-   RPI_FOUND = True
 
 try:
    import RPi.GPIO as GPIO
@@ -23,6 +18,7 @@ except ImportError:
 class PInode:
   #'Common base class for PInodes'#
    def __init__(self):
+      self.mode = ""
       self.mac = ""
       self.model = ""
       self.hostname = ""
@@ -79,7 +75,7 @@ class PInode:
                      },
                   '7':
                      {
-                     'gpio_setting': u'up|down', #PUD_DOWN|PUD_UP
+                     'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
@@ -355,11 +351,12 @@ class PInode:
    # ====================================================================
    #  Initialize - Initial call to setup the object
    # ====================================================================
-   def init(self):
-      print("Init.")
+   def init(self, mode):
+      self.mode = mode
       self.generate_uuid()
       self.get_hostname()
-      self.setup_gpio()
+      if self.mode == "node":
+          self.setup_gpio()
 
    # ====================================================================
    #  Generate a unique name to be tracked by the server.
