@@ -403,6 +403,8 @@ class PInode:
    # ====================================================================
    def monitor_gpio(self):
       #print("Monitor GPIOs.")
+      if not RPI_FOUND:
+         return 1
       for key in self.gpio:
          match = re.search(r'PUD_DOWN', self.gpio[key]["gpio_setting"])
          if match:
