@@ -398,9 +398,9 @@ class PInode:
          match = re.search(r'PUD_DOWN', self.gpio[key]["gpio_setting"])
          if match:
             GPIO.input(key) == 1
-            self.gpio.key.active = True
+            self.gpio[key]['active'] = True
          else:
-            self.gpio.key.active = False
-
+            self.gpio[key]['active'] = False
+         print(str(key) + str(self.gpio[key]['active']))
 
 

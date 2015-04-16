@@ -9,7 +9,7 @@ import lib.PIgeneral as PIgeneral
 def main():
     pi_node = PInode()
     pi_node.init("node")
-
+    pi_node.monitor_gpio()
 if __name__ == '__main__':
     main()
 
