@@ -47,7 +47,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '4':
                      {
@@ -63,7 +63,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '6':
                      {
@@ -79,7 +79,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '8':
                      {
@@ -87,7 +87,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '9':
                      {
@@ -103,7 +103,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '11':
                      {
@@ -111,7 +111,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '12':
                      {
@@ -119,7 +119,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '13':
                      {
@@ -127,7 +127,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '14':
                      {
@@ -143,7 +143,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '16':
                      {
@@ -151,7 +151,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '17':
                      {
@@ -167,7 +167,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '19':
                      {
@@ -175,7 +175,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '20':
                      {
@@ -191,7 +191,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '22':
                      {
@@ -199,7 +199,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '23':
                      {
@@ -207,7 +207,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '24':
                      {
@@ -215,7 +215,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '25':
                      {
@@ -231,7 +231,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '27':
                      {
@@ -255,7 +255,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '30':
                      {
@@ -271,7 +271,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '32':
                      {
@@ -279,7 +279,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '33':
                      {
@@ -287,7 +287,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '34':
                      {
@@ -303,7 +303,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '36':
                      {
@@ -311,7 +311,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '37':
                      {
@@ -319,7 +319,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '38':
                      {
@@ -327,7 +327,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      },
                   '39':
                      {
@@ -343,7 +343,7 @@ class PInode:
                      'active': False,
                      'action': u'<script>',
                      'type': u'<door|window|action|motion_sensor>',
-                     'description': u'The GPIO handels action request for a door.'
+                     'description': u'This is a GPIO.'
                      }
                       
                   }
@@ -351,13 +351,122 @@ class PInode:
    # ====================================================================
    #  Initialize - Initial call to setup the object
    # ====================================================================
-   def init(self, mode, model):
+   def init(self, mode, model, config):
       self.mode = mode
       self.model = model
       self.generate_uuid()
       self.get_hostname()
       if self.mode == "node":
           self.setup_gpio()
+      #GPIO 3
+      self.gpio['3']['action'] = config.get('scripts', 'pin3_script')
+      self.gpio['3']['gpio_setting'] = config.get('node', 'pin3')
+      self.gpio['3']['description'] = config.get('node', 'pin3_description')
+      #GPIO 5
+      self.gpio['5']['action'] = config.get('scripts', 'pin5_script')
+      self.gpio['5']['gpio_setting'] = config.get('node', 'pin5')
+      self.gpio['5']['description'] = config.get('node', 'pin5_description')
+      #GPIO 7
+      self.gpio['7']['action'] = config.get('scripts', 'pin7_script')
+      self.gpio['7']['gpio_setting'] = config.get('node', 'pin7')
+      self.gpio['7']['description'] = config.get('node', 'pin7_description')
+      #GPIO 8
+      self.gpio['8']['action'] = config.get('scripts', 'pin8_script')
+      self.gpio['8']['gpio_setting'] = config.get('node', 'pin8')
+      self.gpio['8']['description'] = config.get('node', 'pin8_description')
+      #GPIO 10
+      self.gpio['10']['action'] = config.get('scripts', 'pin10_script')
+      self.gpio['10']['gpio_setting'] = config.get('node', 'pin10')
+      self.gpio['10']['description'] = config.get('node', 'pin10_description')
+      #GPIO 11
+      self.gpio['11']['action'] = config.get('scripts', 'pin11_script')
+      self.gpio['11']['gpio_setting'] = config.get('node', 'pin11')
+      self.gpio['11']['description'] = config.get('node', 'pin11_description')
+      #GPIO 12
+      self.gpio['12']['action'] = config.get('scripts', 'pin12_script')
+      self.gpio['12']['gpio_setting'] = config.get('node', 'pin12')
+      self.gpio['12']['description'] = config.get('node', 'pin12_description')
+      #GPIO 13
+      self.gpio['13']['action'] = config.get('scripts', 'pin13_script')
+      self.gpio['13']['gpio_setting'] = config.get('node', 'pin13')
+      self.gpio['13']['description'] = config.get('node', 'pin13_description')
+      #GPIO 15
+      self.gpio['15']['action'] = config.get('scripts', 'pin15_script')
+      self.gpio['15']['gpio_setting'] = config.get('node', 'pin15')
+      self.gpio['15']['description'] = config.get('node', 'pin15_description')
+      #GPIO 16
+      self.gpio['16']['action'] = config.get('scripts', 'pin16_script')
+      self.gpio['16']['gpio_setting'] = config.get('node', 'pin16')
+      self.gpio['16']['description'] = config.get('node', 'pin16_description')
+      #GPIO 18
+      self.gpio['18']['action'] = config.get('scripts', 'pin18_script')
+      self.gpio['18']['gpio_setting'] = config.get('node', 'pin18')
+      self.gpio['18']['description'] = config.get('node', 'pin18_description')
+      #GPIO 19
+      self.gpio['19']['action'] = config.get('scripts', 'pin19_script')
+      self.gpio['19']['gpio_setting'] = config.get('node', 'pin19')
+      self.gpio['19']['description'] = config.get('node', 'pin19_description')
+      #GPIO 21
+      self.gpio['21']['action'] = config.get('scripts', 'pin21_script')
+      self.gpio['21']['gpio_setting'] = config.get('node', 'pin21')
+      self.gpio['21']['description'] = config.get('node', 'pin21_description')
+      #GPIO 22
+      self.gpio['22']['action'] = config.get('scripts', 'pin22_script')
+      self.gpio['22']['gpio_setting'] = config.get('node', 'pin22')
+      self.gpio['22']['description'] = config.get('node', 'pin22_description')
+      #GPIO 23
+      self.gpio['23']['action'] = config.get('scripts', 'pin23_script')
+      self.gpio['23']['gpio_setting'] = config.get('node', 'pin23')
+      self.gpio['23']['description'] = config.get('node', 'pin23_description')
+      #GPIO 24
+      self.gpio['24']['action'] = config.get('scripts', 'pin24_script')
+      self.gpio['24']['gpio_setting'] = config.get('node', 'pin24')
+      self.gpio['24']['description'] = config.get('node', 'pin24_description')
+      #GPIO 26
+      self.gpio['26']['action'] = config.get('scripts', 'pin26_script')
+      self.gpio['26']['gpio_setting'] = config.get('node', 'pin26')
+      self.gpio['26']['description'] = config.get('node', 'pin26_description')
+      #GPIO 29
+      self.gpio['29']['action'] = config.get('scripts', 'pin29_script')
+      self.gpio['29']['gpio_setting'] = config.get('node', 'pin29')
+      self.gpio['29']['description'] = config.get('node', 'pin29_description')
+      #GPIO 31
+      self.gpio['31']['action'] = config.get('scripts', 'pin31_script')
+      self.gpio['31']['gpio_setting'] = config.get('node', 'pin31')
+      self.gpio['31']['description'] = config.get('node', 'pin31_description')
+      #GPIO 32
+      self.gpio['32']['action'] = config.get('scripts', 'pin32_script')
+      self.gpio['32']['gpio_setting'] = config.get('node', 'pin32')
+      self.gpio['32']['description'] = config.get('node', 'pin32_description')
+      #GPIO 33
+      self.gpio['33']['action'] = config.get('scripts', 'pin33_script')
+      self.gpio['33']['gpio_setting'] = config.get('node', 'pin33')
+      self.gpio['33']['description'] = config.get('node', 'pin33_description')
+      #GPIO 35
+      self.gpio['35']['action'] = config.get('scripts', 'pin35_script')
+      self.gpio['35']['gpio_setting'] = config.get('node', 'pin35')
+      self.gpio['35']['description'] = config.get('node', 'pin35_description')
+      #GPIO 36
+      self.gpio['36']['action'] = config.get('scripts', 'pin36_script')
+      self.gpio['36']['gpio_setting'] = config.get('node', 'pin36')
+      self.gpio['36']['description'] = config.get('node', 'pin36_description')
+      #GPIO 37
+      self.gpio['37']['action'] = config.get('scripts', 'pin37_script')
+      self.gpio['37']['gpio_setting'] = config.get('node', 'pin37')
+      self.gpio['37']['description'] = config.get('node', 'pin37_description')
+      #GPIO 38
+      self.gpio['38']['action'] = config.get('scripts', 'pin38_script')
+      self.gpio['38']['gpio_setting'] = config.get('node', 'pin38')
+      self.gpio['38']['description'] = config.get('node', 'pin38_description')
+      #GPIO 39
+      self.gpio['39']['action'] = config.get('scripts', 'pin39_script')
+      self.gpio['39']['gpio_setting'] = config.get('node', 'pin39')
+      self.gpio['39']['description'] = config.get('node', 'pin39_description')
+      #GPIO 40
+      self.gpio['40']['action'] = config.get('scripts', 'pin40_script')
+      self.gpio['40']['gpio_setting'] = config.get('node', 'pin40')
+      self.gpio['40']['description'] = config.get('node', 'pin40_description')
+
 
    # ====================================================================
    #  Generate a unique name to be tracked by the server.
