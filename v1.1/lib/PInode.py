@@ -389,6 +389,18 @@ class PInode:
             if match:
                GPIO.setup(int(key), GPIO.OUT)
 
+   # ====================================================================
+   #  Monitor GPIOs
+   # ====================================================================
+   def monitor_gpio(self):
+      print("Monitor GPIOs.")
+      for key in self.gpio:
+         match = re.search(r'PUD_DOWN', self.gpio[key]["gpio_setting"])
+         if match:
+            GPIO.input(key) == 1
+            self.gpio.key.active = True
+         else:
+            self.gpio.key.active = False
 
 
 
