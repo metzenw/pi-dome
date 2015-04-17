@@ -458,10 +458,6 @@ class PInode:
       self.gpio['38']['action'] = config.get('scripts', 'pin38_script')
       self.gpio['38']['gpio_setting'] = config.get('node', 'pin38')
       self.gpio['38']['description'] = config.get('node', 'pin38_description')
-      #GPIO 39
-      self.gpio['39']['action'] = config.get('scripts', 'pin39_script')
-      self.gpio['39']['gpio_setting'] = config.get('node', 'pin39')
-      self.gpio['39']['description'] = config.get('node', 'pin39_description')
       #GPIO 40
       self.gpio['40']['action'] = config.get('scripts', 'pin40_script')
       self.gpio['40']['gpio_setting'] = config.get('node', 'pin40')
@@ -496,8 +492,14 @@ class PInode:
             match = re.search(r'PUD_DOWN', self.gpio[key]["gpio_setting"])
             if match:
                try:
-                  GPIO.setup(int(key), GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-                  print("Setting down on " + key)
+                  if int(key) == 5:
+                     print("Doing nothing with ping 5.")
+                  elif int(key) == 3:
+                     print("Doing nothing with ping 3.")
+                     nothing = 0
+                  else:
+                     print("Setting res down on " + key)
+                     GPIO.setup(int(key), GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
                except ExceptionI:
                   print ("Unable to set gpio down: " + str(ExceptionI))
             match = re.search(r'PUD_UP', self.gpio[key]["gpio_setting"])
@@ -511,17 +513,18 @@ class PInode:
    #  Monitor GPIOs
    # ====================================================================
    def monitor_gpio(self):
-      #print("Monitor GPIOs.")
+      #print("Monitor GPIOs: "+ str(RPI_FOUND))
       if not RPI_FOUND:
          return 1
       for key in self.gpio:
+         #print (key + ": " + self.gpio[key]["gpio_setting"])
          match = re.search(r'PUD_DOWN', self.gpio[key]["gpio_setting"])
          if match:
             if self.model == "b" and int(key) > 26:
                continue
-            if GPIO.input(int(key)) == 1:
+            if GPIO.input(int(key)) == 1 and int(key) != 3 and int(key) != 5:
                self.gpio[key]['active'] = True
-               #print (str(key) + " is active")
+               print (str(key) + " is active")
          else:
             self.gpio[key]['active'] = False
 
