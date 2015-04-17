@@ -16,9 +16,10 @@ server_ipaddr = config.get('server', 'ipaddr')
 def main():
     pi_node = PInode()
     pi_node.init("node", model, config) #Supported b, b+, b+2, and c1
+    pi_node.convert_gpio_to_jason()
     while 1:
         pi_node.monitor_gpio()
-        time.sleep(0.5)
+        time.sleep(1.0)
 
 # ====================================================================
 # Application start

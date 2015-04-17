@@ -3,6 +3,7 @@
 RPI_FOUND = False
 
 #Libraries
+import json
 import socket
 import uuid
 import re
@@ -524,8 +525,21 @@ class PInode:
                continue
             if GPIO.input(int(key)) == 1 and int(key) != 3 and int(key) != 5:
                self.gpio[key]['active'] = True
-               print (str(key) + " is active")
+               #print (str(key) + " is active")
          else:
             self.gpio[key]['active'] = False
+
+
+   # ====================================================================
+   #  Convert GPIOs to jason
+   # ====================================================================
+   def convert_gpio_to_jason(self):
+      data = json.dumps(self.gpio)
+      data_out = json.loads(data)
+      print str(data_out)
+
+
+
+
 
 
