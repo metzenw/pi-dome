@@ -494,9 +494,9 @@ class PInode:
             if match:
                try:
                   if int(key) == 5:
-                     print("Doing nothing with ping 5.")
+                     print("Doing nothing with pin 5.")
                   elif int(key) == 3:
-                     print("Doing nothing with ping 3.")
+                     print("Doing nothing with pin 3.")
                      nothing = 0
                   else:
                      print("Setting res down on " + key)
@@ -536,8 +536,7 @@ class PInode:
    def convert_gpio_to_jason(self):
       data = json.dumps(self.gpio)
       data_out = json.loads(data)
-      print str(data_out)
-
+      return data_out
 
 
 
