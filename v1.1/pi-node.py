@@ -18,7 +18,7 @@ def main():
     pi_node.init("node", model, config) #Supported b, b+, b+2, and c1
     pi_node.convert_gpio_to_jason()
  
-    pi_client_con = PIconnection("client", "localhost", 9090)
+    pi_client_con = PIconnection("client", "192.168.1.100", 9090)
     pi_client_con.init()
 
     while 1:
@@ -26,8 +26,8 @@ def main():
         time.sleep(1.0)
 
         try:
-            pi_client_con = PIconnection("client", "localhost", 9090)
-            pi_client_con.update("test")
+            pi_client_con = PIconnection("client", "192.168.1.100", 9090)
+            pi_client_con.update("gd")
             print "Sent msg test to server."
         except:
             print("Unable to connect to: " + pi_client_con.server_name)

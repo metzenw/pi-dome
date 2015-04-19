@@ -19,7 +19,7 @@ def main():
     pi_node.init("server", model, config) #Supported b, b+, b+2, and c1
     pi_node.convert_gpio_to_jason()
 
-    pi_server_con = PIconnection("server", "localhost", 9090)
+    pi_server_con = PIconnection("server", "0.0.0.0", 9090)
     pi_server_con.init()
     try:
         pi_server_con.update("test")
@@ -27,9 +27,9 @@ def main():
         print("Unable to connect to: " + pi_server_con.server_name)
     while 1:
         #pi_node.monitor_gpio()
-        time.sleep(1.0)
+        time.sleep(0.1)
         pi_server_con.update("test")
-
+        print("Loop")
 if __name__ == '__main__':
     main()
 
