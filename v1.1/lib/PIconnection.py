@@ -13,11 +13,11 @@ tls_client = wrap_socket(client_socket, ssl_version=PROTOCOL_TLSv1, cert_reqs=CE
 
 class PIconnection:
   #'Common base class for PIconnection'#
-   def __init__(self, client_or_server):
+   def __init__(self, client_or_server, server_name, server_port):
       self.client_socket = socket(AF_INET, SOCK_STREAM)
       self.tls_client_socket = wrap_socket(self.client_socket, ssl_version=PROTOCOL_TLSv1, cert_reqs=CERT_NONE)
-      self.server_name = "localhost"
-      self.server_port = 6668
+      self.server_name = server_name
+      self.server_port = server_port
       self.finished = False
       self.service_type = client_or_server
    # ====================================================================
@@ -58,10 +58,11 @@ class PIconnection:
    # ====================================================================
    def update(self, message):
       if self.service_type == "client":
+         print "Client connect."
          self.client_connect()
          self.send_to_server(message)
          self.client_disconnect
       if self.service_type == "server":
-         print "server."
+         print "Server connect."
 
 

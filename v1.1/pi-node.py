@@ -3,7 +3,7 @@ import ConfigParser
 import time
 from lib.PInode import *
 import lib.PIgeneral as PIgeneral
-
+from lib.PIconnection import *
 
 config = ConfigParser.RawConfigParser()
 config.read('node.cfg')
@@ -17,6 +17,12 @@ def main():
     pi_node = PInode()
     pi_node.init("node", model, config) #Supported b, b+, b+2, and c1
     pi_node.convert_gpio_to_jason()
+ 
+    pi_client_con = PIconnection("client", "localhost", 9090)
+    try:
+        pi_client_con.update("test")
+    except:
+        print("Unable to connect to: " + pi_client_con.server_name)
     while 1:
         pi_node.monitor_gpio()
         time.sleep(1.0)
