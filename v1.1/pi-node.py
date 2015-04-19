@@ -19,13 +19,19 @@ def main():
     pi_node.convert_gpio_to_jason()
  
     pi_client_con = PIconnection("client", "localhost", 9090)
-    try:
-        pi_client_con.update("test")
-    except:
-        print("Unable to connect to: " + pi_client_con.server_name)
+    pi_client_con.init()
+
     while 1:
         pi_node.monitor_gpio()
         time.sleep(1.0)
+
+        try:
+            pi_client_con = PIconnection("client", "localhost", 9090)
+            pi_client_con.update("test")
+            print "Sent msg test to server."
+        except:
+            print("Unable to connect to: " + pi_client_con.server_name)
+
 
 # ====================================================================
 # Application start
