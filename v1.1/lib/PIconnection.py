@@ -33,7 +33,7 @@ class PIconnection:
       self.tls_client_socket.send(data_out)    
 
       #receive data
-      data_in=self.tls_client_socket.recv(1024)
+      data_in=self.tls_client_socket.recv(8192)
 
       print ("Waiting for responce from server:")
       #decode message
@@ -70,7 +70,7 @@ class PIconnection:
 
 
       #send and receive data from the client socket
-      data_in=self.connection.recv(1024)
+      data_in=self.connection.recv(8192)
       message=data_in.decode()
       print('client send',message)
       message = "Got it!"
