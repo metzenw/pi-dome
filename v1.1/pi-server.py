@@ -6,10 +6,10 @@ import lib.PIgeneral as PIgeneral
 from lib.PIconnection import *
 
 config = ConfigParser.RawConfigParser()
-config.read('node.cfg')
+config.read('server.cfg')
 model = config.get('node', 'model')
 server_ipaddr = config.get('server', 'ipaddr')
-
+server_port = int(config.get('server', 'port'))
 
 # ====================================================================
 # Main entry into the pi-server
@@ -19,7 +19,7 @@ def main():
     pi_node.init("server", model, config) #Supported b, b+, b+2, and c1
     pi_node.convert_gpio_to_jason()
 
-    pi_server_con = PIconnection("server", "0.0.0.0", 9090)
+    pi_server_con = PIconnection("server", server_ipaddr, server_port)
     pi_server_con.init()
     try:
         pi_server_con.update("test")
