@@ -1,13 +1,27 @@
 pi-dome
 =======
 
-Home automation via a python REST api and Raspberry PI
+Home automation via a python sockets.
+
+Summary: This is a client server based HA system. All wire traffic is secured
+through openssl.
+
+Versions: v1.0 and v1.1. 1.0 is a beta and should not be used. It was a proof of concept for a
+REST API but lacked the real "meat" needed in a full home automation solution.
+
+
+Quick start v1.1
+------------
+- Comming soon
+
+
+Depricated v1.0 install instructions:
 
 Note: In order to use this you will need to install falsk. Please see the following links for details:
 - [Flask Setup](http://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask)
 - [Flask Mega setup](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
 
-Quick start  
+Quick start v1.0  (Depricated)
 ------------
 [RASPBIN]http://www.raspberrypi.org/downloads/)
 
@@ -23,3 +37,7 @@ Quick start
 
 -----------------------------------
 Once you have cloned the repo copy the pi-dome.py into your /var/pi-dome/ directory. 
+
+
+
+
