@@ -65,18 +65,22 @@ class PIconnection:
    # ====================================================================
    def server_listen(self):
       #accept connection
+      print ("Looking for connections.")
       try:
          self.connection, client_address= self.tls_server.accept()
          print ('connection from', client_address)
       except:
+         print("Problem accepting connection from client.")
          return 1
       #send and receive data from the client socket
       data_in=self.connection.recv(8192)
       message=data_in.decode()
-      print('client send',message)
-      message = "Got it!"
-      data_out=message.encode()
+      print('Message recieved from: ' + str(client_address))
+      # Send responce.
+      responce = "Got it!"
+      data_out=responce.encode()
       self.connection.send(data_out)
+      return message, str(client_address[0])
 
    # ====================================================================
    #  Server cleanup - clean up server connections.
@@ -108,6 +112,10 @@ class PIconnection:
          self.client_disconnect
       if self.service_type == "server":
          print "Server connect."
-         self.server_listen()
+         json_out, client_addr = self.server_listen()
+         if json_out:
+            return json_out, client_addr
+         else:
+            return 0, 0
          #self.server_disconnect()
 
