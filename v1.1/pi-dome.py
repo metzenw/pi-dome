@@ -139,16 +139,19 @@ def create_node():
         abort(400)
     #print type(request.json)
     #node_out_dict = ast.literal_eval(request.json)
-    for n_id in request.json:
-        # Add to pi-nodes
-        pi_nodes[n_id] = request.json[n_id]
-        #for gpio_id in request.json[n_id]:
-        #    pi-nodes[n_id][gpio_id] = {}
-        #    print "\t" + gpio_id
-        #    for attr_id in request.json[n_id][gpio_id]:
-        #        print "\t\t" + str(attr_id) + " : " + str(request.json[n_id][gpio_id][attr_id] )
-        #        #pi-nodes[n_id][gpio_id][attr_id] = str(request.json[n_id][gpio_id][attr_id]
-    return jsonify( { 'test': "test" } ), 201
+    try:
+        for n_id in request.json:
+            # Add to pi-nodes
+            pi_nodes[n_id] = request.json[n_id]
+            #for gpio_id in request.json[n_id]:
+            #    pi-nodes[n_id][gpio_id] = {}
+            #    print "\t" + gpio_id
+            #    for attr_id in request.json[n_id][gpio_id]:
+            #        print "\t\t" + str(attr_id) + " : " + str(request.json[n_id][gpio_id][attr_id] )
+            #        #pi-nodes[n_id][gpio_id][attr_id] = str(request.json[n_id][gpio_id][attr_id]
+        return jsonify( { 'result': True } ), 201
+    except:
+        return jsonify( { 'result': False } ), 406
 
 
 @app.route('/api/doors/<int:door_id>', methods = ['PUT'])
@@ -174,9 +177,9 @@ def update_door(door_id):
 def delete_node(node_id):
     try: 
         pi_nodes.pop(node_id, None)
-        return jsonify( { 'result': True } ) 
+        return jsonify( { 'result': True } ) 201
     except:
-        return jsonify( { 'result': False } )
+        return jsonify( { 'result': False } ) 404
 
 
 # ====================================================================
