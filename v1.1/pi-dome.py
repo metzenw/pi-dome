@@ -122,21 +122,26 @@ def get_my_ip():
 # v1.1 pi-node 
 # ====================================================================
 @app.route('/api/nodes/', methods = ['GET'])
-@auth.login_required
+#@auth.login_required
 def get_nodes():
     return jsonify( { 'nodes': pi_nodes } )
 
 @app.route('/api/nodes/<node_id>', methods = ['GET'])
-@auth.login_required
+#@auth.login_required
 def get_node_id(node_id):
-    return jsonify( { node_id : pi_nodes[node_id] } )
+    if node_id in pi_nodes:
+        return jsonify( { node_id : pi_nodes[node_id] } )
+    else:
+        return jsonify( { "result" : False } ), 404
+
+
 
 
 ######################################################
 # Create
 ######################################################
 @app.route('/api/nodes/', methods = ['POST'])
-@auth.login_required
+#@auth.login_required
 def create_node():
     if not request.json :
         abort(400)
@@ -154,7 +159,7 @@ def create_node():
 # Updates after a post
 ######################################################
 @app.route('/api/nodes/<node_id>', methods = ['PUT'])
-@auth.login_required
+#@auth.login_required
 def update_door(node_id):
     if not request.json :
         abort(400)
@@ -171,12 +176,17 @@ def update_door(node_id):
 # Delete
 ######################################################
 @app.route('/api/nodes/<node_id>', methods = ['DELETE'])
-@auth.login_required
+#@auth.login_required
 def delete_node(node_id):
-    try: 
-        pi_nodes.pop(node_id, None)
-        return jsonify( { 'result': True } ), 201
-    except:
+    print("Del request")
+    if node_id in pi_nodes:
+        try: 
+            print "Trying to pop"
+            pi_nodes.pop(node_id, None)
+            return jsonify( { 'result': True } ), 201
+        except:
+            return jsonify( { 'result': False } ), 404
+    else:
         return jsonify( { 'result': False } ), 404
 
 
