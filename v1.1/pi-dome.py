@@ -132,54 +132,50 @@ def get_node_id(node_id):
     return jsonify( { node_id : pi_nodes[node_id] } )
 
 
+######################################################
+# Create
+######################################################
 @app.route('/api/nodes/', methods = ['POST'])
 @auth.login_required
 def create_node():
     if not request.json :
         abort(400)
-    #print type(request.json)
-    #node_out_dict = ast.literal_eval(request.json)
     try:
         for n_id in request.json:
             # Add to pi-nodes
             pi_nodes[n_id] = request.json[n_id]
-            #for gpio_id in request.json[n_id]:
-            #    pi-nodes[n_id][gpio_id] = {}
-            #    print "\t" + gpio_id
-            #    for attr_id in request.json[n_id][gpio_id]:
-            #        print "\t\t" + str(attr_id) + " : " + str(request.json[n_id][gpio_id][attr_id] )
-            #        #pi-nodes[n_id][gpio_id][attr_id] = str(request.json[n_id][gpio_id][attr_id]
         return jsonify( { 'result': True } ), 201
     except:
         return jsonify( { 'result': False } ), 406
 
-
-@app.route('/api/doors/<int:door_id>', methods = ['PUT'])
+######################################################
+# Updates after a post
+######################################################
+@app.route('/api/nodes/<node_id>', methods = ['PUT'])
 @auth.login_required
-def update_door(door_id):
-    door = filter(lambda t: t['id'] == door_id, doors)
-    if len(door) == 0:
-        abort(404)
-    if not request.json:
+def update_door(node_id):
+    if not request.json :
         abort(400)
-    if 'open' in request.json and type(request.json['open']) is not bool:
-        abort(400)
-    door[0]['type'] = request.json.get('type', door[0]['type'])
-    door[0]['gpio'] = request.json.get('gpio', door[0]['gpio'])
-    door[0]['voltage'] = request.json.get('voltage', door[0]['voltage'])
-    door[0]['notes'] = request.json.get('notes', door[0]['notes'])
-    door[0]['description'] = request.json.get('description', door[0]['description'])
-    door[0]['open'] = request.json.get('open', door[0]['open'])
-    return jsonify( { 'door': door[0] } )
 
+    if node_id in pi_nodes:
+        #update node
+        #print ("Found key!")
+        pi_nodes[node_id] = request.json[node_id]
+        return jsonify( { 'result': True } ), 201
+    else:
+        return jsonify( { 'result': False } ), 404
+
+######################################################
+# Delete
+######################################################
 @app.route('/api/nodes/<node_id>', methods = ['DELETE'])
 @auth.login_required
 def delete_node(node_id):
     try: 
         pi_nodes.pop(node_id, None)
-        return jsonify( { 'result': True } ) 201
+        return jsonify( { 'result': True } ), 201
     except:
-        return jsonify( { 'result': False } ) 404
+        return jsonify( { 'result': False } ), 404
 
 
 # ====================================================================
