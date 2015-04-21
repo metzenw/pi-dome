@@ -142,6 +142,8 @@ def create_node():
         abort(400)
     try:
         for n_id in request.json:
+            if n_id in pi_nodes:
+                return jsonify( { 'result': False } ), 404
             # Add to pi-nodes
             pi_nodes[n_id] = request.json[n_id]
         return jsonify( { 'result': True } ), 201
