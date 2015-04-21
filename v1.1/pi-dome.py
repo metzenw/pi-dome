@@ -40,6 +40,9 @@ import ConfigParser
 from flask import Flask, jsonify, abort, make_response, request
 from flask.ext.httpauth import HTTPBasicAuth, HTTPDigestAuth
 
+#Used to convers string to python dict
+import ast
+
 # Read in conf file
 config = ConfigParser.ConfigParser()
 config.read('dome.cfg')
@@ -91,6 +94,8 @@ pi_servers = [
     }
 ]
 
+pi_nodes = {}
+"""
 pi_nodes = {
         'id': 1,
         'version': u'vB',   #vA, vB, vB+
@@ -101,7 +106,7 @@ pi_nodes = {
         'ip': '',
         'active': False
 }
-
+"""
 
 # ====================================================================
 # IP logging
@@ -132,25 +137,17 @@ def get_node_id(node_id):
 def create_node():
     if not request.json :
         abort(400)
-    """
-    nodes_to_write = {request.json.get('id', ""),}
-    nodes_to_write[] = {
-        'id': doors[-1]['id'] + 1,
-        'type': request.json.get('type', ""),
-        'gpio': request.json['gpio'],
-        'voltage': request.json.get('voltage', ""),
-        'notes': request.json.get('notes', ""),
-        'description': request.json.get('description', ""),
-        'active': False,
-        'open': False
-    }
-    doors.append(door)
-    return jsonify( { 'door': door } ), 201
-    """
-    #print request.json.get('id', "")
-    #pi_nodes[request.json.get('id', "")] =  {}
-    print("Blaw nodes post")
-    print(request.json)
+    #print type(request.json)
+    #node_out_dict = ast.literal_eval(request.json)
+    for n_id in request.json:
+        # Add to pi-nodes
+        pi_nodes[n_id] = request.json[n_id]
+        #for gpio_id in request.json[n_id]:
+        #    pi-nodes[n_id][gpio_id] = {}
+        #    print "\t" + gpio_id
+        #    for attr_id in request.json[n_id][gpio_id]:
+        #        print "\t\t" + str(attr_id) + " : " + str(request.json[n_id][gpio_id][attr_id] )
+        #        #pi-nodes[n_id][gpio_id][attr_id] = str(request.json[n_id][gpio_id][attr_id]
     return jsonify( { 'test': "test" } ), 201
 
 
