@@ -2,6 +2,7 @@
 import ConfigParser
 import time
 import json
+from flask import jsonify
 
 #My own libs
 from lib.PInode import *
@@ -23,6 +24,9 @@ def main():
     #pi_node = PInode()
     #pi_node.init("server", model, config) #Supported b, b+, b+2, and c1
     #pi_node.convert_gpio_to_jason()
+    
+    pi_rest = PIrest()
+
     pi_nodes = {}
 
     pi_server_con = PIconnection("server", server_ipaddr, server_port)
@@ -41,14 +45,16 @@ def main():
         else:
             #Work with jason
             print("Process jason")
-            print return_value_update
             pi_nodes[client_addr] = {}
             pi_nodes[client_addr]["gpio"] = json.loads(return_value_update)
             #for key in pi_nodes[client_addr]["gpio"]:
             #    print pi_nodes[client_addr]["gpio"][key]["gpio_setting"]
             #    print pi_nodes[client_addr]["gpio"][key]["type"]
-            for key in pi_nodes:
-                print("PInodes:" + str(key))
+            #for key in pi_nodes:
+                #print("PInodes:" + str(key))
+                #print jsonify({ key : pi_nodes[key]["gpio"] })
+                #print json.dumps(pi_nodes)
+            print(pi_rest.post("/api/nodes/", json.dumps(pi_nodes)))
 if __name__ == '__main__':
     main()
 
