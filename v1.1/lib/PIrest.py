@@ -3,7 +3,7 @@ import httplib
 import base64
 import string
 import json
-
+import urllib2
 
 class PIrest:
   #'Common base class for PIrest'#
@@ -37,5 +37,21 @@ class PIrest:
       conn = httplib.HTTPConnection(self.base_address, self.port, timeout=60)
       conn.request('GET', url, None, { 'Authorization' : 'Basic '+string.strip(base64.encodestring(self.user_name+":"+self.password))})
       return conn.getresponse().read()
+
+   ####################################################
+   # Rest del
+   ####################################################
+   def delete_node(self, sub_url,  id):
+      query_url = "http://vengersonline.com:5000"+ sub_url + id
+      opener = urllib2.build_opener(urllib2.HTTPHandler)
+      req = urllib2.Request(query_url, None)
+      req.get_method = lambda: 'DELETE'
+      url = ""
+      try:
+         url = urllib2.urlopen(req)
+         return 0 
+      except:
+         print("Unable to remove: " + id + ". " + url)
+         return 1
 
 
