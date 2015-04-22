@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 import ConfigParser
 import time
+import json
+
+#My own libs
 from lib.PInode import *
 import lib.PIgeneral as PIgeneral
 from lib.PIconnection import *
-import json
+from lib.PIrest import *
+
 
 config = ConfigParser.RawConfigParser()
 config.read('server.cfg')
@@ -30,13 +34,14 @@ def main():
     while 1:
         #pi_node.monitor_gpio()
         time.sleep(0.1)
-        return_value_update, client_addr = pi_server_con.update("test")
+        return_value_update, client_addr = pi_server_con.update("server")
         if return_value_update == 0:
             
             print("Loop")
         else:
             #Work with jason
             print("Process jason")
+            print return_value_update
             pi_nodes[client_addr] = {}
             pi_nodes[client_addr]["gpio"] = json.loads(return_value_update)
             #for key in pi_nodes[client_addr]["gpio"]:
