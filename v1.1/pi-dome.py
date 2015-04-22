@@ -145,15 +145,21 @@ def get_node_id(node_id):
 def create_node():
     if not request.json :
         abort(400)
+    duplicate_found = 0
     try:
         for n_id in request.json:
             if n_id in pi_nodes:
-                return jsonify( { 'result': False } ), 404
+                #return jsonify( { 'result': False } ), 404
+                duplicate_found = 1
             # Add to pi-nodes
             pi_nodes[n_id] = request.json[n_id]
-        return jsonify( { 'result': True } ), 201
+       # return jsonify( { 'result': True } ), 201
     except:
         return jsonify( { 'result': False } ), 406
+    if duplicate_found == 0:
+        return jsonify( { 'result': True } ), 201
+    else:
+        return jsonify( { 'result': False } ), 404
 
 ######################################################
 # Updates after a post

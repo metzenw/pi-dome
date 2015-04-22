@@ -55,6 +55,7 @@ def main():
                 #print jsonify({ key : pi_nodes[key]["gpio"] })
                 #print json.dumps(pi_nodes)
             print(pi_rest.post("/api/nodes/", json.dumps(pi_nodes)))
+            #print json.dumps(pi_nodes)
 if __name__ == '__main__':
     main()
 
