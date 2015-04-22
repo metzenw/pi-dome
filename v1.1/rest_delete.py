@@ -41,8 +41,12 @@ def delete_node(id):
    opener = urllib2.build_opener(urllib2.HTTPHandler)
    req = urllib2.Request(query_url, None)
    #req = urllib2.Request(query_url, None, headers)
-   req.get_method = lambda: 'DELETE' 
-   url = urllib2.urlopen(req) 
+   req.get_method = lambda: 'DELETE'
+   url = "" 
+   try:
+      url = urllib2.urlopen(req)
+   except:
+      print("Unable to remove: " + id + ". " + url)
 
 delete_node("192.168.1.100")
 
