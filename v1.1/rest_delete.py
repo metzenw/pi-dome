@@ -26,8 +26,23 @@ import json
 
 
 import urllib2
-opener = urllib2.build_opener(urllib2.HTTPHandler)
-request = urllib2.Request('http://vengersonline.com:5000/api/nodes/192.168.1.100')
-request.add_header('Content-Type', 'your/contenttype')
-request.get_method = lambda: 'DELETE'
-url = opener.open(request)
+#opener = urllib2.build_opener(urllib2.HTTPHandler)
+#request = urllib2.Request('http://vengersonline.com:5000/api/nodes/192.168.1.100')
+#request.add_header('Content-Type', 'your/contenttype')
+#request.get_method = lambda: 'DELETE'
+#url = opener.open(request)
+
+def delete_node(id):
+   query_url = "http://vengersonline.com:5000/api/nodes/" + id
+   #query_url = oauth['http://vengersonline.com:5000']+'/api/nodes/%s' % id 
+   #headers = {
+   #  'Authorization': 'OAuth '+oauth['access_token']
+   #}
+   opener = urllib2.build_opener(urllib2.HTTPHandler)
+   req = urllib2.Request(query_url, None)
+   #req = urllib2.Request(query_url, None, headers)
+   req.get_method = lambda: 'DELETE' 
+   url = urllib2.urlopen(req) 
+
+delete_node("192.168.1.100")
+
