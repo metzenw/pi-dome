@@ -3,7 +3,7 @@
 # echo client
 from socket import *
 from ssl import *
-import select
+
 
 class PIconnection:
   #'Common base class for PIconnection'#
@@ -66,32 +66,21 @@ class PIconnection:
    def server_listen(self):
       #accept connection
       print ("Looking for connections.")
-
-      #Try select.
       try:
-         inputready,outputready,exceptready = select.select(self.tls_client_socket, self.outputs, [])
-      except select.error, e:
-         break
-      except socket.error, e:
-         break
-      for s in inputready
-         if s == self.self.tls_client_socket:
-
-         try:
-            self.connection, client_address= self.tls_server.accept()
-            print ('connection from', client_address)
-         except:
-            print("Problem accepting connection from client.")
-            return 1
-         #send and receive data from the client socket
-         data_in=self.connection.recv(8192)
-         message=data_in.decode()
-         print('Message recieved from: ' + str(client_address))
-         # Send responce.
-         responce = "Got it!"
-         data_out=responce.encode()
-         self.connection.send(data_out)
-         return message, str(client_address[0])
+         self.connection, client_address= self.tls_server.accept()
+         print ('connection from', client_address)
+      except:
+         print("Problem accepting connection from client.")
+         return 1
+      #send and receive data from the client socket
+      data_in=self.connection.recv(8192)
+      message=data_in.decode()
+      print('Message recieved from: ' + str(client_address))
+      # Send responce.
+      responce = "Got it!"
+      data_out=responce.encode()
+      self.connection.send(data_out)
+      return message, str(client_address[0])
 
    # ====================================================================
    #  Server cleanup - clean up server connections.
