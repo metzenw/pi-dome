@@ -4,6 +4,8 @@
 from socket import *
 from ssl import *
 import json
+import calendar
+import time
 
 class PIconnection:
   #'Common base class for PIconnection'#
@@ -126,6 +128,7 @@ class PIconnection:
          lock.release()
          if json_out:
             pi_nodes[client_addr] = {}
+            pi_nodes[client_addr]["lastupdate"] = calendar.timegm(time.gmtime())
             pi_nodes[client_addr]["gpio"] = json.loads(json_out)
          #self.server_disconnect()
             #return json_out, client_addr
