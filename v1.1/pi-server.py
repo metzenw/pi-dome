@@ -5,7 +5,8 @@ import json
 from flask import jsonify
 import thread
 import calendar
-
+import signal
+import sys
 
 #My own libs
 from lib.PInode import *
@@ -26,11 +27,25 @@ config.read('server.cfg')
 model = config.get('node', 'model')
 server_ipaddr = config.get('server', 'ipaddr')
 server_port = int(config.get('server', 'port'))
+clean_up_and_exit = 0
+
+# ====================================================================
+# Register signal
+# ====================================================================
+def signal_handler(signal, frame):
+    print('You pressed Ctrl+C!')
+    global clean_up_and_exit 
+    clean_up_and_exit = 1
+    #sys.exit(0)
+    #sys.exit(0)
 
 # ====================================================================
 # Main entry into the pi-server
 # ====================================================================
 def main():
+    # Register signal ctrl + c
+    signal.signal(signal.SIGINT, signal_handler)
+
     reset_delta_count = calendar.timegm(time.gmtime())
     track_delta = calendar.timegm(time.gmtime())
     delta = 2
@@ -42,6 +57,9 @@ def main():
     pi_server_con = PIconnection("server", server_ipaddr, server_port)
     pi_server_con.init()
     while 1:
+        if clean_up_and_exit == 1:
+            #pi_server_con.server_disconnect()
+            sys.exit(0)
         time.sleep(0.1)
         #return_value_update, client_addr = pi_server_con.update("server")
         try:
@@ -59,6 +77,11 @@ def main():
                     thread.start_new_thread(pi_rest.post,("/api/nodes/", json.dumps(pi_nodes), lockrest))
             except:
                 print("Unable to start thread.")
+
+
+# ====================================================================
+# main
+# ====================================================================
 if __name__ == '__main__':
     main()
 

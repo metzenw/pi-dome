@@ -92,11 +92,11 @@ class PIconnection:
    def server_disconnect(self):
       #close the connection
       self.connection.shutdown(SHUT_RDWR)
-      self.connection.close()
+      #self.connection.close()
 
       #close the server socket
       self.server_socket.shutdown(SHUT_RDWR)
-      self.server_socket.close()
+      #self.server_socket.close()
 
 
    def init(self):
@@ -127,6 +127,7 @@ class PIconnection:
          if json_out:
             pi_nodes[client_addr] = {}
             pi_nodes[client_addr]["gpio"] = json.loads(json_out)
+         #self.server_disconnect()
             #return json_out, client_addr
          #self.server_disconnect()
 
