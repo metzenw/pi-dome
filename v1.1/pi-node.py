@@ -31,7 +31,7 @@ def main():
       try:
          if pi_node_json_gpio:
             pi_client_con = PIconnection("client", server_ipaddr, 9090)
-            pi_client_con.update(pi_node_json_gpio)
+            pi_client_con.client_update(pi_node_json_gpio)
             print "Sent msg test to server."
       except:
          print("Unable to connect to: " + pi_client_con.server_name)

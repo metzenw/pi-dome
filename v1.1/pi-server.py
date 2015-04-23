@@ -3,6 +3,7 @@ import ConfigParser
 import time
 import json
 from flask import jsonify
+import thread
 
 #My own libs
 from lib.PInode import *
@@ -10,6 +11,9 @@ import lib.PIgeneral as PIgeneral
 from lib.PIconnection import *
 from lib.PIrest import *
 
+
+lockrest = thread.allocate_lock()
+lockcon = thread.allocate_lock()
 
 config = ConfigParser.RawConfigParser()
 config.read('server.cfg')
@@ -32,21 +36,25 @@ def main():
     pi_server_con = PIconnection("server", server_ipaddr, server_port)
     pi_server_con.init()
     try:
-        pi_server_con.update("test")
+        pi_server_con.server_update("test")
     except:
         print("Unable to connect to: " + pi_server_con.server_name)
     while 1:
         #pi_node.monitor_gpio()
+        print("Loop")
         time.sleep(0.1)
-        return_value_update, client_addr = pi_server_con.update("server")
-        if return_value_update == 0:
-            
-            print("Loop")
-        else:
+        #return_value_update, client_addr = pi_server_con.update("server")
+        try:
+            thread.start_new_thread(pi_server_con.server_update, ("server", pi_nodes, lockcon))
+        except:
+            print("Unable to start thread.")
+#        if return_value_update == 0:
+#            nothing_here = 0
+#        else:
             #Work with jason
-            print("Process jason")
-            pi_nodes[client_addr] = {}
-            pi_nodes[client_addr]["gpio"] = json.loads(return_value_update)
+            #print("Process jason")
+            #pi_nodes[client_addr] = {}
+            #pi_nodes[client_addr]["gpio"] = json.loads(return_value_update)
             #for key in pi_nodes[client_addr]["gpio"]:
             #    print pi_nodes[client_addr]["gpio"][key]["gpio_setting"]
             #    print pi_nodes[client_addr]["gpio"][key]["type"]
@@ -54,7 +62,11 @@ def main():
                 #print("PInodes:" + str(key))
                 #print jsonify({ key : pi_nodes[key]["gpio"] })
                 #print json.dumps(pi_nodes)
-            print(pi_rest.post("/api/nodes/", json.dumps(pi_nodes)))
+        try:
+            thread.start_new_thread(pi_rest.post,("/api/nodes/", json.dumps(pi_nodes), lockrest))
+        except:
+            print("Unable to start thread.")
+            #print(pi_rest.post("/api/nodes/", json.dumps(pi_nodes)))
             #print json.dumps(pi_nodes)
 if __name__ == '__main__':
     main()

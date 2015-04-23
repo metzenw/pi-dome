@@ -3,7 +3,7 @@
 # echo client
 from socket import *
 from ssl import *
-
+import json
 
 class PIconnection:
   #'Common base class for PIconnection'#
@@ -15,6 +15,7 @@ class PIconnection:
       self.server_port = server_port
       self.finished = False
       self.service_type = client_or_server
+
    # ====================================================================
    #  Client Connect - connect to the server
    # ====================================================================
@@ -57,7 +58,10 @@ class PIconnection:
       self.server_socket.listen (1)
       #listen for connection
       self.tls_server = wrap_socket(self.server_socket, ssl_version=PROTOCOL_TLSv1, cert_reqs=CERT_NONE, server_side=True, keyfile='my.key', certfile='my.crt')
-
+      #self.server_socket.setblocking(0)
+      #self.server_socket.settimeout(2)
+      #self.tls_server.setblocking(0)
+      #self.tls_server.settimeout(2)
       print('server started')
 
    # ====================================================================
@@ -102,20 +106,28 @@ class PIconnection:
 
 
    # ====================================================================
-   #  Client client_update - disconnect from server
+   #  Client client_update 
    # ====================================================================
-   def update(self, message):
+   def client_update(self, message):
       if self.service_type == "client":
          print "Client connect."
          self.client_connect()
          self.send_to_server(message)
          self.client_disconnect
+
+   # ====================================================================
+   #  Server server_update 
+   # ====================================================================
+   def server_update(self, message, pi_nodes, lock):
       if self.service_type == "server":
          print "Server connect."
+         lock.acquire()
          json_out, client_addr = self.server_listen()
+         lock.release()
          if json_out:
-            return json_out, client_addr
-         else:
-            return 0, 0
+            pi_nodes[client_addr] = {}
+            pi_nodes[client_addr]["gpio"] = json.loads(json_out)
+            #return json_out, client_addr
          #self.server_disconnect()
+
 

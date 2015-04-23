@@ -15,12 +15,14 @@ class PIrest:
    ####################################################
    # Rest post
    ####################################################
-   def post(self, url, payload):
+   def post(self, url, payload, lockrest):
+      lockrest.acquire()
       print(self.base_address+":"+str(self.port)+url)
       conn = httplib.HTTPConnection(self.base_address, self.port, timeout=60)
       conn.request('POST', url, payload, { 'Authorization' : 'Basic '+string.strip(base64.encodestring(self.user_name+":"+self.password)), 'Content-Type' : 'application/json' })
       r = conn.getresponse()
-      return r.read()
+      lockrest.release()
+      #return r.read()
 
    ####################################################
    # Rest put
