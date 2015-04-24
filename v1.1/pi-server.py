@@ -73,11 +73,12 @@ def main():
             track_delta = calendar.timegm(time.gmtime())
             reset_delta_count = calendar.timegm(time.gmtime())
             try:
+                print lockrest.locked()
                 if not lockrest.locked():
                     thread.start_new_thread(pi_rest.post,("/api/nodes/", json.dumps(pi_nodes), lockrest))
             except:
                 print("Unable to start thread.")
-
+            #print pi_nodes
 
 # ====================================================================
 # main
