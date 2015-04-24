@@ -30,7 +30,7 @@ class PInode:
                      {
                      'gpio_setting': u'3v',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'3v',
                      'description': u'The GPIO outputs continuous 3 volts.'
                      },
@@ -38,7 +38,7 @@ class PInode:
                      {
                      'gpio_setting': u'5v',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'5v',
                      'description': u'The GPIO outputs continuous 5 volts.'
                      },
@@ -46,15 +46,15 @@ class PInode:
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '4':
                      {
                      'gpio_setting': u'5v',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'5v',
                      'description': u'The GPIO outputs continuous 5 volts.'
                      },
@@ -62,15 +62,15 @@ class PInode:
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '6':
                      {
                      'gpio_setting': u'Ground',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'Ground',
                      'description': u'The GPIO is for ground.'
                      },
@@ -78,23 +78,23 @@ class PInode:
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '8':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '9':
                      {
                      'gpio_setting': u'Ground',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'Ground',
                      'description': u'The GPIO is for ground.'
                      },
@@ -102,39 +102,39 @@ class PInode:
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '11':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '12':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '13':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '14':
                      {
                      'gpio_setting': u'Ground',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'Ground',
                      'description': u'The GPIO is for ground.'
                      },
@@ -142,23 +142,23 @@ class PInode:
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '16':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '17':
                      {
                      'gpio_setting': u'3v',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'3v',
                      'description': u'The GPIO delivers 3v continuously.'
                      },
@@ -166,23 +166,23 @@ class PInode:
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '19':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '20':
                      {
                      'gpio_setting': u'Ground',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'Ground',
                      'description': u'The GPIO is for ground.'
                      },
@@ -190,39 +190,39 @@ class PInode:
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '22':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '23':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '24':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '25':
                      {
                      'gpio_setting': u'Ground',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'Ground',
                      'description': u'The GPIO is for ground.'
                      },
@@ -230,15 +230,15 @@ class PInode:
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '27':
                      {
                      'gpio_setting': u'DNC',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'DNC',
                      'description': u'DO NOT CONNECT!'
                      },
@@ -246,7 +246,7 @@ class PInode:
                      {
                      'gpio_setting': u'DNC',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'DNC',
                      'description': u'DO NOT CONNECT!'
                      },
@@ -254,15 +254,15 @@ class PInode:
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '30':
                      {
                      'gpio_setting': u'Ground',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'Ground',
                      'description': u'The GPIO is for ground.'
                      },
@@ -270,31 +270,31 @@ class PInode:
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '32':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '33':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '34':
                      {
                      'gpio_setting': u'Ground',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'Ground',
                      'description': u'The GPIO is for ground.'
                      },
@@ -302,39 +302,39 @@ class PInode:
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '36':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '37':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '38':
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      },
                   '39':
                      {
                      'gpio_setting': u'Ground',
                      'active': False,
-                     'action': u'<script>',
+                     'action': u'script',
                      'type': u'Ground',
                      'description': u'The GPIO is for ground.'
                      },
@@ -342,8 +342,8 @@ class PInode:
                      {
                      'gpio_setting': u'PUD_DOWN', #PUD_DOWN|PUD_UP
                      'active': False,
-                     'action': u'<script>',
-                     'type': u'<door|window|action|motion_sensor>',
+                     'action': u'script',
+                     'type': u'door,window,action,motion_sensor',
                      'description': u'This is a GPIO.'
                      }
                       
