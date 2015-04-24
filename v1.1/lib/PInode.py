@@ -526,6 +526,8 @@ class PInode:
             if GPIO.input(int(key)) == 1 and int(key) != 3 and int(key) != 5:
                self.gpio[key]['active'] = True
                #print (str(key) + " is active")
+            elif GPIO.input(int(key)) == 0 and int(key) != 3 and int(key) != 5:
+               self.gpio[key]['active'] = False
          else:
             self.gpio[key]['active'] = False
 
