@@ -17,10 +17,13 @@ class PIrest:
    ####################################################
    def post(self, url, payload, lockrest):
       lockrest.acquire()
-      print(self.base_address+":"+str(self.port)+url)
-      conn = httplib.HTTPConnection(self.base_address, self.port, timeout=60)
-      conn.request('POST', url, payload, { 'Authorization' : 'Basic '+string.strip(base64.encodestring(self.user_name+":"+self.password)), 'Content-Type' : 'application/json' })
-      r = conn.getresponse()
+      try:
+         print(self.base_address+":"+str(self.port)+url)
+         conn = httplib.HTTPConnection(self.base_address, self.port, timeout=6)
+         conn.request('POST', url, payload, { 'Authorization' : 'Basic '+string.strip(base64.encodestring(self.user_name+":"+self.password)), 'Content-Type' : 'application/json' })
+         r = conn.getresponse()
+      except:
+         print("I was unable to post to the REST server.")
       lockrest.release()
       #return r.read()
 
