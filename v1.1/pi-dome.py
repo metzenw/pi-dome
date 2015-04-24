@@ -156,10 +156,10 @@ def create_node():
        # return jsonify( { 'result': True } ), 201
     except:
         return jsonify( { 'result': False } ), 406
-    if duplicate_found == 0:
-        return jsonify( { 'result': True } ), 201
-    else:
-        return jsonify( { 'result': False } ), 404
+    #if duplicate_found == 0:
+    return jsonify( { 'result': True } ), 201
+    #else:
+    #    return jsonify( { 'result': False } ), 404
 
 ######################################################
 # Updates after a post

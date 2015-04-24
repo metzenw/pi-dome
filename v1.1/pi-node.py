@@ -25,13 +25,14 @@ def main():
    while 1:
       pi_node.monitor_gpio()
       pi_node_json_gpio = pi_node.convert_gpio_to_jason()
-      #print pi_node_jason_gpio
-      time.sleep(3.0)
+      #print pi_node_json_gpio
+      time.sleep(1.0)
 
       try:
          if pi_node_json_gpio:
             pi_client_con = PIconnection("client", server_ipaddr, 9090)
             pi_client_con.client_update(pi_node_json_gpio)
+            pi_client_con.client_disconnect()
             print "Sent msg test to server."
       except:
          print("Unable to connect to: " + pi_client_con.server_name)
