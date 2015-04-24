@@ -273,4 +273,4 @@ def not_found(error):
 # ====================================================================
 if __name__ == '__main__':
     print ("Starting Flask \n")
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', threaded=True)
