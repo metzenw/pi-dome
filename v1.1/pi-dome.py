@@ -39,6 +39,7 @@ import ConfigParser
 
 from flask import Flask, jsonify, abort, make_response, request
 from flask.ext.httpauth import HTTPBasicAuth, HTTPDigestAuth
+from flask import render_template
 
 #Used to convers string to python dict
 import ast
@@ -107,6 +108,14 @@ pi_nodes = {
         'active': False
 }
 """
+
+# ====================================================================
+# Root
+# ====================================================================
+@app.route('/')
+def hello(name=None):
+    return render_template('hello.html', name=name)
+
 
 # ====================================================================
 # IP logging
