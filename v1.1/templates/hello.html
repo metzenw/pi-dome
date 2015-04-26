@@ -1,0 +1,25 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+
+<script>
+$.ajax({
+     url: "http://vengersonline.com:5000/api/nodes/",
+     dataType: 'text',
+     success: function(data) {
+          alert(data);
+          //var elements = $("<div>").html(data)[0].getElementsByTagName("ul")[0].getElementsByTagName("li");
+          //for(var i = 0; i < elements.length; i++) {
+          //     var theText = elements[i].firstChild.nodeValue;
+               // Do something here
+          //}
+     }
+});
+</script>
+
+</body>
+</html>
+~
+
