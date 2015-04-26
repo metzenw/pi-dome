@@ -19,7 +19,7 @@ def main():
    pi_node.init("node", model, config) #Supported b, b+, b+2, and c1
    pi_node.convert_gpio_to_jason()
  
-   pi_client_con = PIconnection("client", server_ipaddr, 9090)
+   pi_client_con = PIconnection("client", server_ipaddr, server_port)
    pi_client_con.init()
 
    while 1:
@@ -30,7 +30,7 @@ def main():
 
       try:
          if pi_node_json_gpio:
-            pi_client_con = PIconnection("client", server_ipaddr, 9090)
+            pi_client_con = PIconnection("client", server_ipaddr, server_port)
             pi_client_con.client_update(pi_node_json_gpio)
             pi_client_con.client_disconnect()
             print "Sent msg test to server."

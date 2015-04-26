@@ -75,7 +75,7 @@ def main():
             try:
                 print lockrest.locked()
                 if not lockrest.locked():
-                    thread.start_new_thread(pi_rest.post,("/api/nodes/", json.dumps(pi_nodes), lockrest))
+                    thread.start_new_thread(pi_rest.post2,("/api/nodes/", json.dumps(pi_nodes), lockrest))
             except:
                 print("Unable to start thread.")
             #print pi_nodes

@@ -8,10 +8,22 @@ import urllib2
 class PIrest:
   #'Common base class for PIrest'#
    def __init__(self):
-      self.base_address = "vengersonline.com"
-      self.port = 5000
+      self.base_address = "api.vengersonline.com"
+      self.port = 80
       self.user_name = "pi-dome"
       self.password = "pi-dome"
+   ####################################################
+   # post test 2
+   ####################################################
+   def post2(self, url, payload, lockrest):
+      lockrest.acquire()
+      try:
+         req = urllib2.Request(self.base_address+url)
+         req.add_header('Content-Type', 'application/json')
+         response = urllib2.urlopen(req, payload)
+      except:
+         print("I was unable to post to the REST server.")
+      lockrest.release()
    ####################################################
    # Rest post
    ####################################################
@@ -19,11 +31,14 @@ class PIrest:
       lockrest.acquire()
       try:
          print(self.base_address+":"+str(self.port)+url)
-         conn = httplib.HTTPConnection(self.base_address, self.port, timeout=6)
+         if sel.port == 80:
+            conn = httplib.HTTPConnection(self.base_address, timeout=6)
+         else:
+            conn = httplib.HTTPConnection(self.base_address, self.port, timeout=6)
          conn.request('POST', url, payload, { 'Authorization' : 'Basic '+string.strip(base64.encodestring(self.user_name+":"+self.password)), 'Content-Type' : 'application/json' })
          r = conn.getresponse()
       except:
-         print("I was unable to post to the REST server.")
+         print("I was unable to post to the REST server.", r)
       lockrest.release()
       #return r.read()
 
