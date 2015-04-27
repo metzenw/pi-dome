@@ -22,6 +22,7 @@ def main():
    pi_client_con = PIconnection("client", server_ipaddr, server_port)
    pi_client_con.init()
 
+   print("Connecting to: ", server_ipaddr, server_port)
    while 1:
       pi_node.monitor_gpio()
       pi_node_json_gpio = pi_node.convert_gpio_to_jason()

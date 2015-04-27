@@ -54,6 +54,7 @@ def main():
 
     pi_nodes = {}
     # Create a server connection.
+    print("Connecting to:", server_ipaddr, server_port)
     pi_server_con = PIconnection("server", server_ipaddr, server_port)
     pi_server_con.init()
     while 1:
@@ -75,7 +76,7 @@ def main():
             try:
                 print lockrest.locked()
                 if not lockrest.locked():
-                    thread.start_new_thread(pi_rest.post2,("/api/nodes/", json.dumps(pi_nodes), lockrest))
+                    thread.start_new_thread(pi_rest.post,("/api/nodes/", json.dumps(pi_nodes), lockrest))
             except:
                 print("Unable to start thread.")
             #print pi_nodes
