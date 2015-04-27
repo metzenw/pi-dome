@@ -2,13 +2,13 @@
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-
-        $("#div1").fadeOut(3000);
-        $("#div2").fadeOut(100);
-        $("#div3").fadeOut(1000);
-        $("#div1").fadeIn(3000);
-});
+//$(document).ready(function(){
+//
+//        $("#div1").fadeOut(3000);
+//        $("#div2").fadeOut(100);
+//        $("#div3").fadeOut(1000);
+//        $("#div1").fadeIn(3000);
+//});
 </script>
 
 
@@ -16,6 +16,7 @@ $(document).ready(function(){
 <body>
 
 <script>
+
 function callHome() {
    $.ajax({
       url: "http://vengersonline.com:5000/api/nodes/",
@@ -24,31 +25,32 @@ function callHome() {
          //alert(data);
          var nodeObj = JSON.parse(data);
          //document.getElementById("nodes").innerHTML = data;
-         console.log(nodeObj.nodes["192.168.1.100"].lastupdate);
-         console.log(nodeObj.nodes["192.168.1.100"]["gpio"]["1"].active);
          //console.log(nodeObj.nodes["192.168.1.100"].lastupdate);
+         var gd_down = nodeObj.nodes["192.168.1.100"]["gpio"]["12"].active; //Garage Door Down
+         var gd_up = nodeObj.nodes["192.168.1.100"]["gpio"]["16"].active; //Garage Door up
+         var kitchen_door = nodeObj.nodes["192.168.1.100"]["gpio"]["18"].active; //Door Kitchen
+         var porch_door = nodeObj.nodes["192.168.1.100"]["gpio"]["15"].active; //Door Porch
+         var garage_sensor = nodeObj.nodes["192.168.1.100"]["gpio"]["7"].active;  //Garage Sensor 
+         var fd_sensor = nodeObj.nodes["192.168.1.100"]["gpio"]["23"].active; //Front Door motion sensor
+         var fd_closed = nodeObj.nodes["192.168.1.100"]["gpio"]["21"].active; //Fron door door sensor
+         var living_sensor = nodeObj.nodes["192.168.1.100"]["gpio"]["24"].active; //Living room motion sensor
+         //console.log(living_sensor);
+         document.getElementById("nodes").innerHTML = living_sensor;
+         if(living_sensor) {
+            $("#div1").fadeIn(500);
+         }
+         else {
+            $("#div1").fadeOut(1000);
+         }
      }
    });
 }
 
-setInterval(callHome, 5000);
+setInterval(callHome, 500);
 </script>
 
-<img src="http://www.vengersonline.com/images/pen.jpg">
 <div id="div1" style="width:80px;height:80px;background-color:red;"></div><br>
-<div id="div2" style="width:80px;height:80px;background-color:green;"></div><br>
-<div id="div3" style="width:80px;height:80px;background-color:blue;"></div>
 <p id="nodes"></p>
-
-<script>
-//document.getElementById("demo").innerHTML =
-//nodeObj.nodes[''].firstName + " " + obj.employees[1].lastName;
-</script>
-
-
-
-
-
 
 
 
