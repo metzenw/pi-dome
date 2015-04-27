@@ -1,16 +1,120 @@
 <html>
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>
-//$(document).ready(function(){
-//
-//        $("#div1").fadeOut(3000);
-//        $("#div2").fadeOut(100);
-//        $("#div3").fadeOut(1000);
-//        $("#div1").fadeIn(3000);
-//});
-</script>
+<style>
 
+#garage {
+    width:150px;
+    height:100px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+
+#porchdoor {
+    position:relative;
+    top:55;
+    right:12;
+    width:20px;
+    height:30px;
+    float:left;
+    border: 1px solid black;
+}
+
+#kitchengaragedoor {
+    position:relative;
+    top:90;
+    right:30;
+    width:30px;
+    height:20px;
+    float:left;
+    border: 1px solid black;
+}
+
+
+#porch {
+    width:150px;
+    height:100px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+#livingkitch {
+    width:320px;
+    height:100px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+
+#frontdoor {
+    position:relative;
+    top:-12;
+    right:-311;
+    width:20px;
+    height:30px;
+    float:left;
+    border: 1px solid black;
+}
+
+#garagedoor {
+    position:relative;
+    top:-10;
+    right:-90;
+    width:15px;
+    height:120px;
+    float:left;
+    border: 1px solid black;
+}
+
+
+#frontdoormotion {
+    width:20px;
+    height:100px;
+    float:left;
+    border: 1px solid black;
+}
+
+#master {
+    width:140px;
+    height:300px;
+    float:left;
+    padding:10px;
+
+    border: 1px solid black;	 	 
+}
+
+#hall {
+    width:20px;
+    height:300px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+
+#bed {
+    width:119px;
+    height:138px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+#bath {
+    width:119px;
+    height:138px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+
+#container {
+    width:370px;
+    height:560px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+</style>
 
 </head>
 <body>
@@ -19,7 +123,7 @@
 
 function callHome() {
    $.ajax({
-      url: "http://vengersonline.com:5000/api/nodes/",
+      url: "http://api.vengersonline.com:/api/nodes/",
       dataType: 'text',
       success: function(data) {
          //alert(data);
@@ -35,22 +139,136 @@ function callHome() {
          var fd_closed = nodeObj.nodes["192.168.1.100"]["gpio"]["21"].active; //Fron door door sensor
          var living_sensor = nodeObj.nodes["192.168.1.100"]["gpio"]["24"].active; //Living room motion sensor
          //console.log(living_sensor);
-         document.getElementById("nodes").innerHTML = living_sensor;
          if(living_sensor) {
-            $("#div1").fadeIn(500);
+            //$("#div1").fadeIn(500);
+            document.getElementById("livingkitch").style.backgroundColor = "#FF0000";
          }
          else {
-            $("#div1").fadeOut(1000);
+            //$("#div1").fadeOut(1000);
+            document.getElementById("livingkitch").style.backgroundColor = "#00CC00";
+         }
+         if(garage_sensor) {
+            //$("#div1").fadeIn(500);
+            document.getElementById("garage").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("garage").style.backgroundColor = "#00CC00";
+         }
+         if(!fd_closed) {
+            //$("#div1").fadeIn(500);
+            document.getElementById("frontdoor").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("frontdoor").style.backgroundColor = "#00CC00";
+         }
+         if(fd_sensor) {
+            //$("#div1").fadeIn(500);
+            document.getElementById("frontdoormotion").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("frontdoormotion").style.backgroundColor = "#00CC00";
+         }
+         if(!porch_door) {
+            //$("#div1").fadeIn(500);
+            document.getElementById("porchdoor").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("porchdoor").style.backgroundColor = "#00CC00";
+         }
+         if(!kitchen_door) {
+            //$("#div1").fadeIn(500);
+            document.getElementById("kitchengaragedoor").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("kitchengaragedoor").style.backgroundColor = "#00CC00";
+         }
+         if(gd_down) {
+            //$("#div1").fadeIn(500);
+            document.getElementById("garagedoor").style.backgroundColor = "#00CC00";
+         }
+         else if(gd_up){
+            //$("#div1").fadeOut(1000);
+            document.getElementById("garagedoor").style.backgroundColor = "#FF0000";
+         }
+         else if(!gd_down && !gd_up) {
+            document.getElementById("garagedoor").style.backgroundColor = "#ab82ff";
          }
      }
    });
 }
 
-setInterval(callHome, 500);
+setInterval(callHome, 3000);
 </script>
 
-<div id="div1" style="width:80px;height:80px;background-color:red;"></div><br>
-<p id="nodes"></p>
+<!-- <div id="div1" style="width:80px;height:80px"> </div><br> -->
+<!-- <div id="div1" style="width:80px;height:80px;background-color:white;"></div><br> -->
+
+<div id=container>
+
+<div id="porch">
+porch
+</div>
+<!--
+<div id="porchdoor">
+d
+o
+o
+r
+</div>
+-->
+<div id="garage">
+   <div id="porchdoor">
+      D
+   </div>
+   garage
+   <div id="kitchengaragedoor">
+      D
+   </div>
+   <div id="garagedoor">
+
+   </div>
+</div>
+
+<div id="livingkitch">
+livingkitch
+   <div id="frontdoor">
+   D
+   </div>
+
+</div>
+
+<div id="frontdoormotion">
+</div>
+
+
+
+<div id="master">
+master
+</div>
+
+<div id="hall">
+hall
+</div>
+
+<div id="bed">
+bed
+</div>
+
+<div id="bath">
+bath
+</div>
+
+</div>
+
+
+
+
+
 
 
 
