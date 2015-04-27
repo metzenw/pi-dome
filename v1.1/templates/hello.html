@@ -198,8 +198,85 @@
     border: 1px solid black;
 }
 
+#officedoor {
+    position:relative;
+    top:90;
+    right:-120;
+    width:30px;
+    height:20px;
+    float:left;
+    border: 1px solid black;
+}
 
+#storagedoor {
+    position:relative;
+    top:90;
+    right:-60;
+    width:30px;
+    height:20px;
+    float:left;
+    border: 1px solid black;
+}
 
+#basementbathdoor {
+    position:relative;
+    top:106;
+    right:-90;
+    width:20px;
+    height:30px;
+    float:left;
+    border: 1px solid black;
+}
+
+#basementdoor {
+    position:relative;
+    top:290;
+    right:-120;
+    width:30px;
+    height:20px;
+    float:left;
+    border: 1px solid black;
+}
+
+#skyroomdoor {
+    position:relative;
+    top:-11;
+    right:-120;
+    width:30px;
+    height:20px;
+    float:left;
+    border: 1px solid black;
+}
+
+#masterdoor {
+    position:relative;
+    top:131;
+    right:-130;
+    width:20px;
+    height:30px;
+    float:left;
+    border: 1px solid black;
+}
+
+#beddoor {
+    position:relative;
+    top:115;
+    right:11;
+    width:20px;
+    height:30px;
+    float:left;
+    border: 1px solid black;
+}
+
+#bathdoor {
+    position:relative;
+    top:-5;
+    right:11;
+    width:20px;
+    height:30px;
+    float:left;
+    border: 1px solid black;
+}
 </style>
 
 </head>
@@ -294,63 +371,65 @@ setInterval(callHome, 3000);
 <!-- <div id="div1" style="width:80px;height:80px"> </div><br> -->
 <!-- <div id="div1" style="width:80px;height:80px;background-color:white;"></div><br> -->
 
+<!-- First floor -->
 <div id=container>
-
-<div id="porch">
-porch
-</div>
-<div id="garage">
-   <div id="porchdoor">
-      D
+   <div id="porch">
+      Porch
    </div>
-   garage
-   <div id="kitchengaragedoor">
-      D
+   <div id="garage">
+      <div id="porchdoor">
+         D
+      </div>
+      Garage
+      <div id="kitchengaragedoor">
+         D
+      </div>
+      <div id="garagedoor">
+      </div>
    </div>
-   <div id="garagedoor">
-
+   <div id="livingkitch">
+      Kitchen & livingroom
+      <div id="frontdoor">
+         D
+      </div>
+   </div>
+   <div id="frontdoormotion">
+   </div>
+   <div id="master">
+      Master
+      <div id=masterdoor>
+         D
+      </div>
+   </div>
+   <div id="hall">
+      Hall
+   </div>
+   <div id="bed">
+      Bed
+      <div id=beddoor>
+         D
+      </div>
+   </div>
+   <div id="bath">
+      Bath
+      <div id=bathdoor>
+         D
+      </div>
    </div>
 </div>
-
-<div id="livingkitch">
-livingkitch
-   <div id="frontdoor">
-   D
-   </div>
-
-</div>
-
-<div id="frontdoormotion">
-</div>
-
-
-
-<div id="master">
-master
-</div>
-
-<div id="hall">
-hall
-</div>
-
-<div id="bed">
-bed
-</div>
-
-<div id="bath">
-bath
-</div>
-
-</div>
-
-
-
+<!-- Basement -->
 <div id=basement>
    <div id="office">
-      office
+      Office
+      <div id=officedoor>
+         D
+      </div>
    </div>
    <div id="foodstorage">
       Storage
+      <div id=storagedoor>
+         D
+      </div>
    </div>
    <div id=sub_basement>
       <div id="furnace">
@@ -358,6 +437,9 @@ bath
       </div>
       <div id="basementbath">
          Bath
+      <div id=basementbathdoor>
+         D
+      </div>
       </div>
    </div>
    <div id="basementhall">
@@ -367,10 +449,16 @@ bath
    <div id="basementgeneral">
       Basement 
       room
+      <div id=basementdoor>
+         D
+      </div>
    </div>
 
    <div id="skyroom">
       Skyroom
+      <div id=skyroomdoor>
+         D
+      </div>
    </div>
    <div id="stairs">
       Stairs
