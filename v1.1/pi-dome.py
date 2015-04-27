@@ -38,7 +38,7 @@
 import ConfigParser
 
 from flask import Flask, jsonify, abort, make_response, request
-from flask.ext.httpauth import HTTPBasicAuth, HTTPDigestAuth
+#from flask.ext.httpauth import HTTPBasicAuth, HTTPDigestAuth
 from flask import render_template
 
 #Used to convers string to python dict
@@ -69,7 +69,7 @@ app = Flask(__name__)
 
 # Setup HTTPAuth
 auth = HTTPBasicAuth()
-@auth.get_password
+#@auth.get_password
 def get_password(username):
     if username == HTTP_AUTH_USER:
         return HTTP_AUTH_PASSWORD
@@ -209,12 +209,12 @@ def delete_node(node_id):
 # pi_servers
 # ====================================================================
 @app.route('/api/servers/', methods = ['GET'])
-@auth.login_required
+#@auth.login_required
 def get_servers():
     return jsonify( { 'servers': pi_servers } )
 
 @app.route('/api/servers/<int:server_id>', methods = ['GET'])
-@auth.login_required
+#@auth.login_required
 def get_server_id(server_id):
     n_id = filter(lambda t: t['id'] == server_id, pi_servers)
     if len(n_id ) == 0:
@@ -242,7 +242,7 @@ def create_server():
     return jsonify( { 'test': "test" } ), 201
 
 @app.route('/api/servers/<int:server_id>', methods = ['PUT'])
-@auth.login_required
+#@auth.login_required
 def update_server(server_id):
     server = filter(lambda t: t['id'] == server_id, pi_servers)
     if len(server) == 0:
@@ -260,7 +260,7 @@ def update_server(server_id):
     return jsonify( { 'server': server[0] } )
 
 @app.route('/api/servers/<int:server_id>', methods = ['DELETE'])
-@auth.login_required
+#@auth.login_required
 def delete_server(server_id):
     server = filter(lambda t: t['id'] == server_id, pi_servers)
     if len(server) == 0:
