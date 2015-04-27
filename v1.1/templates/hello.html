@@ -1,23 +1,56 @@
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+        $("#div1").fadeOut(3000);
+        $("#div2").fadeOut(100);
+        $("#div3").fadeOut(1000);
+        $("#div1").fadeIn(3000);
+});
+</script>
+
+
 </head>
 <body>
 
 <script>
-$.ajax({
-     url: "http://vengersonline.com:5000/api/nodes/",
-     dataType: 'text',
-     success: function(data) {
-          alert(data);
-          //var elements = $("<div>").html(data)[0].getElementsByTagName("ul")[0].getElementsByTagName("li");
-          //for(var i = 0; i < elements.length; i++) {
-          //     var theText = elements[i].firstChild.nodeValue;
-               // Do something here
-          //}
+function callHome() {
+   $.ajax({
+      url: "http://vengersonline.com:5000/api/nodes/",
+      dataType: 'text',
+      success: function(data) {
+         //alert(data);
+         var nodeObj = JSON.parse(data);
+         //document.getElementById("nodes").innerHTML = data;
+         console.log(nodeObj.nodes["192.168.1.100"].lastupdate);
+         console.log(nodeObj.nodes["192.168.1.100"]["gpio"]["1"].active);
+         //console.log(nodeObj.nodes["192.168.1.100"].lastupdate);
      }
-});
+   });
+}
+
+setInterval(callHome, 5000);
 </script>
+
+<img src="http://www.vengersonline.com/images/pen.jpg">
+<div id="div1" style="width:80px;height:80px;background-color:red;"></div><br>
+<div id="div2" style="width:80px;height:80px;background-color:green;"></div><br>
+<div id="div3" style="width:80px;height:80px;background-color:blue;"></div>
+<p id="nodes"></p>
+
+<script>
+//document.getElementById("demo").innerHTML =
+//nodeObj.nodes[''].firstName + " " + obj.employees[1].lastName;
+</script>
+
+
+
+
+
+
+
 
 </body>
 </html>
