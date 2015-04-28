@@ -8,8 +8,8 @@ import urllib2
 class PIrest:
   #'Common base class for PIrest'#
    def __init__(self):
-      self.base_address = "vengersonline.com"
-      self.port = 5000
+      self.base_address = "api.vengersonline.com"
+      self.port = 80
       self.user_name = "pi-dome"
       self.password = "pi-dome"
    ####################################################
