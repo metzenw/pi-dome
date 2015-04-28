@@ -316,6 +316,14 @@ function callHome() {
          //Office sensors
          var office_door = nodeObj.nodes["192.168.1.103"]["gpio"]["11"].active; //Office door
          var office_sensor = nodeObj.nodes["192.168.1.103"]["gpio"]["13"].active; //Office door
+         var office_temp = nodeObj.nodes["192.168.1.103"]["gpio"]["temp"]; //Temp
+         var office_humidity = nodeObj.nodes["192.168.1.103"]["gpio"]["humidity"]; //Humidity
+ 
+
+         //$("temp").update(office_temp);
+         document.getElementById('temp').innerHTML = "<b>Temp:</b>  " + office_temp;
+         //$("humidity").update(office_humidity);
+         document.getElementById('humidity').innerHTML = "<b>Humidity:</b>  " + office_humidity;
  
          if(!office_door) {
             document.getElementById("officedoor").style.backgroundColor = "#FF0000";
@@ -500,6 +508,8 @@ setInterval(callHome, 1200);
    </div>
 </div>
 
+<div id=temp>  </div>
+<div id=humidity> </div>
 
 
 
