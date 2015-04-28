@@ -312,6 +312,26 @@ function callHome() {
          var fd_sensor = nodeObj.nodes["192.168.1.100"]["gpio"]["23"].active; //Front Door motion sensor
          var fd_closed = nodeObj.nodes["192.168.1.100"]["gpio"]["21"].active; //Fron door door sensor
          var living_sensor = nodeObj.nodes["192.168.1.100"]["gpio"]["24"].active; //Living room motion sensor
+ 
+         //Office sensors
+         var office_door = nodeObj.nodes["192.168.1.103"]["gpio"]["11"].active; //Office door
+         var office_sensor = nodeObj.nodes["192.168.1.103"]["gpio"]["13"].active; //Office door
+ 
+         if(!office_door) {
+            document.getElementById("officedoor").style.backgroundColor = "#FF0000";
+         }
+         else {
+            document.getElementById("officedoor").style.backgroundColor = "#00CC00";
+         }
+         if(office_sensor) {
+            document.getElementById("office").style.backgroundColor = "#FF0000";
+         }
+         else {
+            document.getElementById("office").style.backgroundColor = "#00CC00";
+         }
+
+
+
          //console.log(living_sensor);
          if(living_sensor) {
             //$("#div1").fadeIn(500);
@@ -376,7 +396,7 @@ function callHome() {
    });
 }
 
-setInterval(callHome, 3000);
+setInterval(callHome, 1200);
 </script>
 
 <!-- <div id="div1" style="width:80px;height:80px"> </div><br> -->
