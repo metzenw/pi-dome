@@ -5,6 +5,7 @@ from lib.PInode import *
 import lib.PIgeneral as PIgeneral
 from lib.PIconnection import *
 from lib.PItemp import *
+import json
 
 config = ConfigParser.RawConfigParser()
 config.read('node.cfg')
@@ -30,16 +31,16 @@ def main():
    while 1:
       far, hum = pi_temp.get_temp_and_humidity()
       pi_node.monitor_gpio()
-      pi_node_json_gpio = pi_node.convert_gpio_to_jason()
-      #print pi_node_json_gpio
+      pi_node_json_gpio, json_enc = pi_node.convert_gpio_to_jason()
      
       #Add temp and far to serer update.
-      #pi_node_json_gpio['']
-
+      json_enc['temp'] =  far
+      json_enc['humidity'] = hum
+      
       try:
          if pi_node_json_gpio:
             pi_client_con = PIconnection("client", server_ipaddr, server_port)
-            pi_client_con.client_update(pi_node_json_gpio)
+            pi_client_con.client_update(json.dumps(json_enc))
             pi_client_con.client_disconnect()
             print "Sent msg test to server."
       except:
