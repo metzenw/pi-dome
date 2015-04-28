@@ -294,7 +294,7 @@
 <body>
 
 <script>
-
+audio = new Audio('http://vengersonline.com/audio/bell1.mp3');
 function callHome() {
    $.ajax({
       url: "http://api.vengersonline.com:/api/nodes/",
@@ -359,6 +359,7 @@ function callHome() {
          }
          if(fd_sensor) {
             //$("#div1").fadeIn(500);
+            audio.play();
             document.getElementById("frontdoormotion").style.backgroundColor = "#FF0000";
          }
          else {
