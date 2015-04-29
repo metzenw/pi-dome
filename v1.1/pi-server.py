@@ -17,7 +17,7 @@ from lib.PIrest import *
 
 reset_delta_count = calendar.timegm(time.gmtime())
 track_delta = calendar.timegm(time.gmtime())
-delta = 3
+delta = 1
 
 lockrest = thread.allocate_lock()
 lockcon = thread.allocate_lock()
@@ -48,7 +48,7 @@ def main():
 
     reset_delta_count = calendar.timegm(time.gmtime())
     track_delta = calendar.timegm(time.gmtime())
-    delta = 2
+    delta = 1
  
     pi_rest = PIrest()
 
