@@ -294,10 +294,21 @@
 <body>
 
 <script>
-audio = new Audio('http://vengersonline.com/audio/bell1.mp3');
+door_bell_audio = new Audio('http://vengersonline.com/audio/bell1.mp3');
+garage_moving_audio = new Audio('http://vengersonline.com/audio/romulan_alarm.mp3');
+garage_open_audio = new Audio('http://vengersonline.com/audio/tng_hum_clean.mp3');
+
+(function titleScroller(text) {
+    document.title = text;
+    setTimeout(function () {
+        titleScroller(text.substr(1) + text.substr(0, 1));
+    }, 500);
+}(" pi-dome "));
+
 function callHome() {
    $.ajax({
-      url: "http://api.vengersonline.com:/api/nodes/",
+      //url: "http://api.vengersonline.com:/api/nodes/",
+      url: "http://api.pi-dome.com:/api/nodes/",
       dataType: 'text',
       success: function(data) {
          //alert(data);
@@ -321,9 +332,9 @@ function callHome() {
  
 
          //$("temp").update(office_temp);
-         document.getElementById('temp').innerHTML = "<b>Temp:</b>  " + office_temp;
+         document.getElementById('temp').innerHTML = "<b>Temp:</b>  " + office_temp + "F";
          //$("humidity").update(office_humidity);
-         document.getElementById('humidity').innerHTML = "<b>Humidity:</b>  " + office_humidity;
+         document.getElementById('humidity').innerHTML = "<b>Humidity:</b>  " + office_humidity + "%";
  
          if(!office_door) {
             document.getElementById("officedoor").style.backgroundColor = "#FF0000";
@@ -367,7 +378,7 @@ function callHome() {
          }
          if(fd_sensor) {
             //$("#div1").fadeIn(500);
-            audio.play();
+            door_bell_audio.play();
             document.getElementById("frontdoormotion").style.backgroundColor = "#FF0000";
          }
          else {
@@ -392,13 +403,18 @@ function callHome() {
          }
          if(gd_down) {
             //$("#div1").fadeIn(500);
+            garage_open_audio.loop = false;
             document.getElementById("garagedoor").style.backgroundColor = "#00CC00";
          }
          else if(gd_up){
             //$("#div1").fadeOut(1000);
+            garage_open_audio.loop = true;
+            garage_open_audio.play();
             document.getElementById("garagedoor").style.backgroundColor = "#FF0000";
          }
          else if(!gd_down && !gd_up) {
+            arage_open_audio.loop = false;
+            garage_moving_audio.play();
             document.getElementById("garagedoor").style.backgroundColor = "#ab82ff";
          }
      }
