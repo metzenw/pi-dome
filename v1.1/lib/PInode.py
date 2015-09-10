@@ -538,7 +538,7 @@ class PInode:
    def convert_gpio_to_jason(self):
       data = json.dumps(self.gpio)
       data_out = json.loads(data)
-      return data
+      return data, data_out
 
 
 

@@ -1,0 +1,585 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<style>
+
+#garage {
+    width:150px;
+    height:100px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+
+#foodstorage {
+    width:150px;
+    height:100px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;
+}
+
+#porchdoor {
+    position:relative;
+    top:55;
+    right:12;
+    width:20px;
+    height:30px;
+    float:left;
+    border: 1px solid black;
+}
+
+#kitchengaragedoor {
+    position:relative;
+    top:90;
+    right:30;
+    width:30px;
+    height:20px;
+    float:left;
+    border: 1px solid black;
+}
+
+
+#porch {
+    width:150px;
+    height:100px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+
+#office {
+    width:150px;
+    height:100px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;
+}
+
+
+#livingkitch {
+    width:320px;
+    height:100px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+
+#sub_basement  {
+    width:122px;
+    height:200px;
+    float:left;
+}
+
+#furnace {
+    width:100px;
+    height:150px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;
+}
+
+#basementbath {
+    width:100px;
+    height:128px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;
+}
+
+
+#frontdoor {
+    position:relative;
+    top:-12;
+    right:-311;
+    width:20px;
+    height:30px;
+    float:left;
+    border: 1px solid black;
+}
+
+#garagedoor {
+    position:relative;
+    top:-10;
+    right:-90;
+    width:15px;
+    height:120px;
+    float:left;
+    border: 1px solid black;
+}
+
+
+#frontdoormotion {
+    width:20px;
+    height:100px;
+    float:left;
+    border: 1px solid black;
+}
+
+#master {
+    width:140px;
+    height:300px;
+    float:left;
+    padding:10px;
+
+    border: 1px solid black;	 	 
+}
+
+#basementgeneral {
+    width:150px;
+    height:300px;
+    float:left;
+    padding:10px;
+
+    border: 1px solid black;
+}
+
+#hall {
+    width:20px;
+    height:300px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+
+#basementhall {
+    width:28px;
+    height:300px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;
+}
+
+
+#bed {
+    width:119px;
+    height:138px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+#bath {
+    width:119px;
+    height:138px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+
+#skyroom {
+    width:150px;
+    height:100px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;
+}
+#stairs {
+    width:150px;
+    height:100px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;
+}
+
+
+#container {
+    width:370px;
+    height:560px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;	 	 
+}
+
+#basement {
+    width:370px;
+    height:560px;
+    float:left;
+    padding:10px;
+    border: 1px solid black;
+}
+
+#officedoor {
+    position:relative;
+    top:90;
+    right:-120;
+    width:30px;
+    height:20px;
+    float:left;
+    border: 1px solid black;
+}
+
+#storagedoor {
+    position:relative;
+    top:90;
+    right:-60;
+    width:30px;
+    height:20px;
+    float:left;
+    border: 1px solid black;
+}
+
+#basementbathdoor {
+    position:relative;
+    top:106;
+    right:-90;
+    width:20px;
+    height:30px;
+    float:left;
+    border: 1px solid black;
+}
+
+#basementdoor {
+    position:relative;
+    top:290;
+    right:-120;
+    width:30px;
+    height:20px;
+    float:left;
+    border: 1px solid black;
+}
+
+#skyroomdoor {
+    position:relative;
+    top:-11;
+    right:-120;
+    width:30px;
+    height:20px;
+    float:left;
+    border: 1px solid black;
+}
+
+#masterdoor {
+    position:relative;
+    top:131;
+    right:-130;
+    width:20px;
+    height:30px;
+    float:left;
+    border: 1px solid black;
+}
+
+#beddoor {
+    position:relative;
+    top:115;
+    right:11;
+    width:20px;
+    height:30px;
+    float:left;
+    border: 1px solid black;
+}
+
+#bathdoor {
+    position:relative;
+    top:-5;
+    right:11;
+    width:20px;
+    height:30px;
+    float:left;
+    border: 1px solid black;
+}
+
+#slidingdoor {
+    background:white;
+    //background:#00CC00;
+    position:relative;
+    top:-11;
+    right:0;
+    width:60px;
+    height:20px;
+    float:left;
+    border: 1px solid black;
+}
+
+</style>
+
+</head>
+<body>
+
+<script>
+door_bell_audio = new Audio('http://vengersonline.com/audio/bell1.mp3');
+door_bell_audio.preload = "auto";
+garage_moving_audio = new Audio('http://vengersonline.com/audio/romulan_alarm.mp3');
+garage_moving_audio.preload = "auto";
+garage_open_audio = new Audio('http://vengersonline.com/audio/tng_hum_clean2.mp3');
+garage_open_audio.preload = "auto";
+office_alert = new Audio('http://vengersonline.com/audio/computerbeep_29.mp3');
+office_alert.preload = "auto";
+front_door_open = new Audio('http://vengersonline.com/audio/alert24.mp3'); 
+front_door_open.preload = "auto";
+
+
+var scrolling_text = " pi-dome ";
+(function titleScroller(text) {
+    document.title = text;
+    setTimeout(function () {
+        titleScroller(text.substr(1) + text.substr(0, 1));
+    }, 500);
+}(scrolling_text));
+
+function callHome() {
+   $.ajax({
+      //url: "http://api.vengersonline.com:/api/nodes/",
+      url: "http://api.pi-dome.com:/api/nodes/",
+      dataType: 'text',
+      success: function(data) {
+         //alert(data);
+         var nodeObj = JSON.parse(data);
+         //document.getElementById("nodes").innerHTML = data;
+         //console.log(nodeObj.nodes["192.168.1.100"].lastupdate);
+         var gd_down = nodeObj.nodes["192.168.1.100"]["gpio"]["12"].active; //Garage Door Down
+         var gd_up = nodeObj.nodes["192.168.1.100"]["gpio"]["16"].active; //Garage Door up
+         var kitchen_door = nodeObj.nodes["192.168.1.100"]["gpio"]["18"].active; //Door Kitchen
+         var porch_door = nodeObj.nodes["192.168.1.100"]["gpio"]["15"].active; //Door Porch
+         var garage_sensor = nodeObj.nodes["192.168.1.100"]["gpio"]["7"].active;  //Garage Sensor 
+         var fd_sensor = nodeObj.nodes["192.168.1.100"]["gpio"]["23"].active; //Front Door motion sensor
+         var fd_closed = nodeObj.nodes["192.168.1.100"]["gpio"]["21"].active; //Fron door door sensor
+         var living_sensor = nodeObj.nodes["192.168.1.100"]["gpio"]["24"].active; //Living room motion sensor
+         var back_porch = nodeObj.nodes["192.168.1.100"]["gpio"]["26"].active;  //Back porch motion sensor
+         var back_sliding_door = nodeObj.nodes["192.168.1.100"]["gpio"]["19"].active; //Sliding back porch door sensor
+
+         //Office sensors
+         //if(!nodeObj.nodes["192.168.1.103"]) {
+         //    var office_door = true;
+         //    var office_sensor = false;
+         //    var office_temp = 0;
+         //    var office_humidity = 0;
+         //}
+         //else {
+             var office_door = nodeObj.nodes["192.168.1.103"]["gpio"]["11"].active; //Office door
+             var office_sensor = nodeObj.nodes["192.168.1.103"]["gpio"]["13"].active; //Office door
+             var office_temp = nodeObj.nodes["192.168.1.103"]["gpio"]["temp"]; //Temp
+             var office_humidity = nodeObj.nodes["192.168.1.103"]["gpio"]["humidity"]; //Humidity
+         //}
+ 
+
+         //$("temp").update(office_temp);
+         document.getElementById('temp').innerHTML = "<b>Temp:</b>  " + office_temp + "F";
+         //$("humidity").update(office_humidity);
+         document.getElementById('humidity').innerHTML = "<b>Humidity:</b>  " + office_humidity + "%";
+ 
+         if(!office_door) {
+            //office_alert.play();
+            document.getElementById("officedoor").style.backgroundColor = "#FF0000";
+         }
+         else {
+            document.getElementById("officedoor").style.backgroundColor = "#00CC00";
+         }
+         if(office_sensor) {
+            //office_alert.play();
+            document.getElementById("office").style.backgroundColor = "#FF0000";
+         }
+         else {
+            document.getElementById("office").style.backgroundColor = "#00CC00";
+         }
+
+         if(back_porch) {
+            //$("#div1").fadeIn(500);
+            document.title = "Back proch";
+            document.getElementById("porch").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("porch").style.backgroundColor = "#00CC00";
+         }
+
+         if(!back_sliding_door) {
+            //$("#div1").fadeIn(500);
+            document.title = "Sliding door";
+            document.getElementById("slidingdoor").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("slidingdoor").style.backgroundColor = "#00CC00";
+         }
+
+         //console.log(living_sensor);
+         if(living_sensor) {
+            //$("#div1").fadeIn(500);
+            document.title = "Family room";
+            document.getElementById("livingkitch").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("livingkitch").style.backgroundColor = "#00CC00";
+         }
+         if(garage_sensor) {
+            //$("#div1").fadeIn(500);
+            document.title = "Garage";
+            document.getElementById("garage").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("garage").style.backgroundColor = "#00CC00";
+         }
+         if(!fd_closed) {
+            //$("#div1").fadeIn(500);
+            document.title = "Front door.";
+            //front_door_open.play();
+            document.getElementById("frontdoor").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("frontdoor").style.backgroundColor = "#00CC00";
+         }
+         if(fd_sensor) {
+            //$("#div1").fadeIn(500);
+            document.title = "Door bell";
+            door_bell_audio.play();
+            document.getElementById("frontdoormotion").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("frontdoormotion").style.backgroundColor = "#00CC00";
+         }
+         if(!porch_door) {
+            document.title = "Porch door.";
+            //$("#div1").fadeIn(500);
+            document.getElementById("porchdoor").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("porchdoor").style.backgroundColor = "#00CC00";
+         }
+         if(!kitchen_door) {
+            //$("#div1").fadeIn(500);
+            document.title = "Kitchen door.";
+            document.getElementById("kitchengaragedoor").style.backgroundColor = "#FF0000";
+         }
+         else {
+            //$("#div1").fadeOut(1000);
+            document.getElementById("kitchengaragedoor").style.backgroundColor = "#00CC00";
+         }
+         if(gd_down) {
+            //$("#div1").fadeIn(500);
+            garage_open_audio.loop = false;
+            document.getElementById("garagedoor").style.backgroundColor = "#00CC00";
+         }
+         else if(gd_up){
+            //$("#div1").fadeOut(1000);
+            document.title = "Garage door.";
+            garage_open_audio.play();
+            garage_open_audio.loop = true;
+            document.getElementById("garagedoor").style.backgroundColor = "#FF0000";
+         }
+         else if(!gd_down && !gd_up) {
+            garage_open_audio.loop = false;
+            garage_moving_audio.play();
+            document.getElementById("garagedoor").style.backgroundColor = "#ab82ff";
+         }
+     }
+   });
+}
+
+setInterval(callHome, 1200);
+
+</script>
+
+<!-- <div id="div1" style="width:80px;height:80px"> </div><br> -->
+<!-- <div id="div1" style="width:80px;height:80px;background-color:white;"></div><br> -->
+
+<!-- First floor -->
+<div id=container>
+   <div id="porch">
+      Porch
+   </div>
+   <div id="garage">
+      <div id="porchdoor">
+         D
+      </div>
+      Garage
+      <div id="kitchengaragedoor">
+         D
+      </div>
+      <div id="garagedoor">
+      </div>
+   </div>
+   <div id="livingkitch">
+      Kitchen & livingroom
+      <div id="frontdoor">
+         D
+      </div>
+      <div id=slidingdoor>
+         D
+      </div>
+   </div>
+   <div id="frontdoormotion">
+   </div>
+   <div id="master">
+      Master
+      <div id=masterdoor>
+         D
+      </div>
+   </div>
+   <div id="hall">
+      Hall
+   </div>
+   <div id="bed">
+      Bed
+      <div id=beddoor>
+         D
+      </div>
+   </div>
+   <div id="bath">
+      Bath
+      <div id=bathdoor>
+         D
+      </div>
+   </div>
+</div>
+<!-- Basement -->
+<div id=basement>
+   <div id="office">
+      Office
+      <div id=officedoor>
+         D
+      </div>
+   </div>
+   <div id="foodstorage">
+      Storage
+      <div id=storagedoor>
+         D
+      </div>
+   </div>
+   <div id=sub_basement>
+      <div id="furnace">
+         Furnace
+      </div>
+      <div id="basementbath">
+         Bath
+      <div id=basementbathdoor>
+         D
+      </div>
+      </div>
+   </div>
+   <div id="basementhall">
+      Hall
+   </div>
+
+   <div id="basementgeneral">
+      Basement 
+      room
+      <div id=basementdoor>
+         D
+      </div>
+   </div>
+
+   <div id="skyroom">
+      Skyroom
+      <div id=skyroomdoor>
+         D
+      </div>
+   </div>
+   <div id="stairs">
+      Stairs
+   </div>
+</div>
+
+<div id=temp>  </div>
+<div id=humidity> </div>
+
+
+
+</body>
+</html>
+~
+

@@ -4,7 +4,7 @@ import time
 from lib.PInode import *
 import lib.PIgeneral as PIgeneral
 from lib.PIconnection import *
-from lib.PItemp import *
+#from lib.PItemp import *
 import json
 
 config = ConfigParser.RawConfigParser()
@@ -18,7 +18,7 @@ server_port = int(config.get('server', 'port'))
 # ====================================================================
 def main():
    #Create a temperature
-   pi_temp = PItemp()
+   #pi_temp = PItemp()
    #Create a node
    pi_node = PInode()
    pi_node.init("node", model, config) #Supported b, b+, b+2, and c1
@@ -29,13 +29,13 @@ def main():
 
    print("Connecting to: ", server_ipaddr, server_port)
    while 1:
-      far, hum = pi_temp.get_temp_and_humidity()
+      #far, hum = pi_temp.get_temp_and_humidity()
       pi_node.monitor_gpio()
       pi_node_json_gpio, json_enc = pi_node.convert_gpio_to_jason()
      
       #Add temp and far to serer update.
-      json_enc['temp'] =  far
-      json_enc['humidity'] = hum
+      #json_enc['temp'] =  far
+      #json_enc['humidity'] = hum
       
       try:
          if pi_node_json_gpio:
@@ -45,7 +45,6 @@ def main():
             print "Sent msg test to server."
       except:
          print("Unable to connect to: " + pi_client_con.server_name)
-
       time.sleep(0.2)
 
 # ====================================================================
